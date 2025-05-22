@@ -1,8 +1,18 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
 :root {
   --almost-black: #0A0A0A;
   --material-dark: #121212;
   --neon-yellow:  #FFFB3B;
   --neon-cyan:    #00FFF7;
   --neon-magenta: #FF00FF;
+}
+@keyframes fade {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 0.2; }
+}
+
+.animate-fade {
+  animation: fade 8s ease-in-out infinite;
 }
