@@ -11,11 +11,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         {/* Default landing → How To Use */}
-        <Route path="/" element={<HowToUse />} />
+        <Route path="/how-to-use" element={<HowToUse />} />
 
         {/* After “Continue” → Intro + Loader */}
-        <Route path="/intro" element={<HomePage />} />
+        
 
         {/* Final builder */}
         <Route path="/builder" element={<ResumeBuilder />} />
