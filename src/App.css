@@ -1,0 +1,22 @@
+/* Typewriter cursor blink */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  from, to { opacity: 0; }
+  50%      { opacity: 1; }
+}
+
+/* R3F Background and other existing styles */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+:root {
+  --almost-black: #0a0a0a;
+}
+/* Make the loader stroke glow */
+.loader-svg-glow {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 59, 0.8))
+          drop-shadow(0 0 24px rgba(255, 255, 59, 0.6));
+}

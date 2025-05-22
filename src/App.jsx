@@ -1,12 +1,28 @@
-import React from 'react'
-import HomePage from './pages/HomePage'
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-const App = () => {
+import HowToUse      from './pages/HowToUse';
+import HomePage      from './pages/HomePage';
+import ResumeBuilder from './pages/ResumeBuilder';
+import './App.css';
+
+export default function App() {
   return (
-    <div    style={{ fontFamily: '"Orbitron", sans-serif' }}>
-      <HomePage/>
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        {/* Default landing → How To Use */}
+        <Route path="/" element={<HowToUse />} />
 
-export default App
+        {/* After “Continue” → Intro + Loader */}
+        <Route path="/intro" element={<HomePage />} />
+
+        {/* Final builder */}
+        <Route path="/builder" element={<ResumeBuilder />} />
+
+        {/* Fallback for any unknown URL */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}

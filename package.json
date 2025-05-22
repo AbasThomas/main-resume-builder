@@ -12,9 +12,11 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@hookform/resolvers": "^5.0.1",
+    "@react-three/drei": "^10.0.8",
     "@react-three/fiber": "^9.1.2",
     "@tailwindcss/vite": "^4.1.7",
     "@types/three": "^0.176.0",
+    "framer-motion": "^12.12.1",
     "gsap": "^3.13.0",
     "html2pdf.js": "^0.10.3",
     "react": "^19.1.0",
