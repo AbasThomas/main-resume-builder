@@ -1,6 +1,8 @@
+// src/pages/HomePage.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import R3FBackground from '../components/R3FBackground';
+import Loader from '../components/Loader';
 
 export default function HomePage({ onStart }) {
   const fullTitle = 'Craft Your Resume Like a Pro';
@@ -10,8 +12,8 @@ export default function HomePage({ onStart }) {
   const [stageText, setStageText] = useState('Getting Ready...');
   const subtitleRef = useRef();
   const buttonRef = useRef();
-  const percentRef = useRef();
 
+  // Typewriter + GSAP
   useEffect(() => {
     let idx = 0;
     const interval = setInterval(() => {
@@ -19,22 +21,14 @@ export default function HomePage({ onStart }) {
       idx++;
       if (idx === fullTitle.length) {
         clearInterval(interval);
-        gsap.fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.2 }
-        );
-        gsap.fromTo(
-          buttonRef.current,
-          { scale: 0.8, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'back.out(1.7)',
-            delay: 1.0,
-          }
-        );
+        gsap.fromTo(subtitleRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.2 });
+        gsap.fromTo(buttonRef.current, { scale: 0.8, opacity: 0 }, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'back.out(1.7)',
+          delay: 1.0,
+        });
         gsap.to(buttonRef.current, {
           scale: 1.05,
           boxShadow: '0 0 20px #fffb3b, 0 0 40px #fffb3b',
@@ -70,12 +64,6 @@ export default function HomePage({ onStart }) {
       const stage = stages.find(s => pct <= s.threshold);
       setStageText(stage.text);
 
-      gsap.fromTo(
-        percentRef.current,
-        { scale: 0.95, opacity: 0.8 },
-        { scale: 1.05, opacity: 1, duration: 0.3, ease: 'power1.inOut' }
-      );
-
       if (pct >= 100) {
         clearInterval(loader);
         setTimeout(onStart, 500);
@@ -85,63 +73,9 @@ export default function HomePage({ onStart }) {
     return () => clearInterval(loader);
   }, [loading, onStart]);
 
-  // Circle parameters
-  const R = 70; // larger radius
-  const strokeWidth = 4; // thinner stroke
-  const C = 2 * Math.PI * R;
-  const dashoffset = C - (percent / 100) * C;
-
   return loading ? (
-    // ——— Loading Overlay ———
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-[var(--almost-black)] text-white z-50">
-      <div className="absolute inset-0 z-0">
-        <R3FBackground />
-      </div>
-
-      <div className="relative z-10 flex flex-col items-center justify-center">
-        <svg width={180} height={180} className="mb-6">
-          {/* Back circle */}
-          <circle
-            cx="90"
-            cy="90"
-            r={R}
-            stroke="#222"
-            strokeWidth={strokeWidth}
-            fill="none"
-          />
-          {/* Glowing progress ring */}
-          <circle
-            cx="90"
-            cy="90"
-            r={R}
-            stroke="#FFFB3B"
-            strokeWidth={strokeWidth}
-            fill="none"
-            strokeDasharray={C}
-            strokeDashoffset={dashoffset}
-            strokeLinecap="round"
-            transform="rotate(-90 90 90)"
-            style={{
-              filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
-              transition: 'stroke-dashoffset 0.3s ease-out',
-            }}
-          />
-        </svg>
-
-        <div
-          ref={percentRef}
-          className="text-5xl font-extrabold text-yellow-300 transition-all duration-300"
-          style={{
-            textShadow: '0 0 10px #fffb3b, 0 0 20px #fffb3b',
-          }}
-        >
-          {percent}%
-        </div>
-        <div className="mt-3 text-lg text-gray-400">{stageText}</div>
-      </div>
-    </div>
+    <Loader percent={percent} stageText={stageText} />
   ) : (
-    // ——— Normal Home Page ———
     <div className="relative w-full h-screen text-white overflow-hidden bg-[var(--almost-black)]">
       <div className="absolute inset-0 z-0">
         <R3FBackground />

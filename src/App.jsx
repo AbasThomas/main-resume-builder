@@ -15,7 +15,7 @@ export default function App() {
         {/* Default landing → How To Use */}
         <Route path="/how-to-use" element={<HowToUse />} />
 
-        {/* After “Continue” → Intro + Loader */}
+        {/* After “Continu  e” → Intro + Loader */}
         
 
         {/* Final builder */}
