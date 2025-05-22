@@ -1,5 +1,5 @@
 // src/pages/HomePage.jsx
-import React, { useState, u     seEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import R3FBackground from '../components/R3FBackground';
 
