@@ -4,20 +4,20 @@ import R3FBackground from '../components/R3FBackground';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/all';
 import '../animations/Gsap'
-gsap.registerPlugin(SplitText);
-let split = SplitText.create('h1', {
-  type : 'lines, words',
-})
-gsap.from(split.lines , {
-    yPercent : "random([])",
-    autoAlpha : 0,
-    repeat: 1,
-    yoyo : true,
-    stagger : {
-        amount : 0.5,
-        from : "random"
-    }
-})
+// gsap.registerPlugin(SplitText);
+// let split = SplitText.create('h1', {
+//   type : 'lines, words',
+// })
+// gsap.from(split.lines , {
+//     yPercent : "random([])",
+//     autoAlpha : 0,
+//     repeat: 1,
+//     yoyo : true,
+//     stagger : {
+//         amount : 0.5,
+//         from : "random"
+//     }
+// })
 export default function HowToUse() {
   const navigate = useNavigate();
 

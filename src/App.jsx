@@ -7,6 +7,7 @@ import ResumeBuilder from './pages/ResumeBuilder';
 import LoaderScreen from './components/LoaderScreen';
 import './App.css';
 import './animations/Gsap'
+import Text from './pages/Text'
 export default function App() {
   const [showLoader, setShowLoader] = useState(false);
 
@@ -14,7 +15,8 @@ export default function App() {
     <BrowserRouter>
       {showLoader && <LoaderScreen onComplete={() => setShowLoader(false)} />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path ="/" element = {<Text/>}/>
+        <Route path="/home" element={<HomePage />} />
         <Route path="/how-to-use" element={<HowToUse />} />
         <Route
           path="/loader"
