@@ -8,7 +8,16 @@ gsap.registerPlugin(SplitText);
 let split = SplitText.create('h1', {
   type : 'lines, words',
 })
-s
+gsap.from(split.lines , {
+    yPercent : "random([])",
+    autoAlpha : 0,
+    repeat: 1,
+    yoyo : true,
+    stagger : {
+        amount : 0.5,
+        from : "random"
+    }
+})
 export default function HowToUse() {
   const navigate = useNavigate();
 
