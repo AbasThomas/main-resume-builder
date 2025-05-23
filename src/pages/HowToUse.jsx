@@ -1,118 +1,29 @@
-// src/pages/HomePage.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import gsap from 'gsap';
 import R3FBackground from '../components/R3FBackground';
-import Loader from '../components/Loader';
 
-export default function HomePage() {
-  const fullTitle = 'Craft Your Resume Like a Pro';
-  const [displayed, setDisplayed] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [percent, setPercent] = useState(0);
-  const [stageText, setStageText] = useState('Getting Ready...');
-  const subtitleRef = useRef();
-  const buttonRef = useRef();
+export default function HowToUse() {
   const navigate = useNavigate();
 
-  // Typewriter + GSAP animations
-  useEffect(() => {
-    let idx = 0;
-    const interval = setInterval(() => {
-      setDisplayed(fullTitle.slice(0, idx + 1));
-      idx++;
-      if (idx === fullTitle.length) {
-        clearInterval(interval);
-        gsap.fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.2 }
-        );
-        gsap.fromTo(
-          buttonRef.current,
-          { scale: 0.8, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'back.out(1.7)',
-            delay: 1.0,
-          }
-        );
-        gsap.to(buttonRef.current, {
-          scale: 1.05,
-          boxShadow: '0 0 20px #fffb3b, 0 0 40px #fffb3b',
-          repeat: -1,
-          yoyo: true,
-          duration: 1.5,
-          ease: 'sine.inOut',
-          delay: 1.8,
-        });
-      }
-    }, 100);
-    return () => clearInterval(interval);
-  }, [fullTitle]);
-
-  const handleStart = () => {
-    setLoading(true);
+  const handleProceed = () => {
+    navigate('/loader');
   };
 
-  // Loading animation logic
-  useEffect(() => {
-    if (!loading) return;
-
-    let pct = 0;
-    const stages = [
-      { threshold: 33, text: 'Getting Ready...' },
-      { threshold: 66, text: 'Almost There...' },
-      { threshold: 100, text: 'Finishing Up...' },
-    ];
-
-    const loader = setInterval(() => {
-      pct += 1;
-      setPercent(pct);
-      const stage = stages.find(s => pct <= s.threshold);
-      setStageText(stage.text);
-
-      if (pct >= 100) {
-        clearInterval(loader);
-        setTimeout(() => navigate('/builder'), 400); // Navigate after loading
-      }
-    }, 30);
-
-    return () => clearInterval(loader);
-  }, [loading, navigate]);
-
-  return loading ? (
-    <Loader percent={percent} stageText={stageText} />
-  ) : (
-    <div className="relative w-full h-screen text-white overflow-hidden bg-[var(--almost-black)]">
-      {/* Background */}
+  return (
+    <div className="relative w-full h-screen text-white bg-[var(--almost-black)] overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <R3FBackground />
+        <R3FBackground blur />
       </div>
-
-      {/* Overlay UI */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
-        <h1
-          className="text-5xl sm:text-6xl font-extrabold tracking-tight"
-          style={{ fontFamily: 'Orbitron, sans-serif' }}
-        >
-          {displayed}
-          <span className="cursor">|</span>
-        </h1>
-        <p
-          ref={subtitleRef}
-          className="mt-4 text-lg sm:text-xl text-gray-300 max-w-xl opacity-0"
-        >
-          AI-enhanced. Fast. Sleek. Professional.
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4">How To Use</h2>
+        <p className="max-w-xl text-lg text-gray-300 mb-8">
+          Learn how to craft your resume with our AI-enhanced builder. Follow simple steps, choose styles, and export professionally.
         </p>
         <button
-          ref={buttonRef}
-          onClick={handleStart}
-          className="mt-10 rounded-full border-4 border-yellow-300 px-6 py-3 text-lg font-bold hover:bg-yellow-300 hover:text-black transition-all duration-300 shadow-xl opacity-0 transform scale-75"
+          onClick={handleProceed}
+          className="px-6 py-3 rounded-full text-lg font-bold bg-yellow-300 text-black hover:bg-yellow-400 transition"
         >
-          Let’s Start
+          Proceed
         </button>
       </div>
     </div>

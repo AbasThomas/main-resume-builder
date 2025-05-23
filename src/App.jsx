@@ -1,27 +1,26 @@
-// src/App.jsx
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import HowToUse      from './pages/HowToUse';
-import HomePage      from './pages/HomePage';
+import HomePage from './pages/HomePage';
+import HowToUse from './pages/HowToUse';
 import ResumeBuilder from './pages/ResumeBuilder';
+import LoaderScreen from './components/LoaderScreen';
 import './App.css';
 
 export default function App() {
+  const [showLoader, setShowLoader] = useState(false);
+
   return (
     <BrowserRouter>
+      {showLoader && <LoaderScreen onComplete={() => setShowLoader(false)} />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* Default landing → How To Use */}
         <Route path="/how-to-use" element={<HowToUse />} />
-
-        {/* After “Continu  e” → Intro + Loader */}
-        
-
-        {/* Final builder */}
+        <Route
+          path="/loader"
+          element={<LoaderScreen onComplete={() => setShowLoader(false)} />}
+        />
         <Route path="/builder" element={<ResumeBuilder />} />
-
-        {/* Fallback for any unknown URL */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
