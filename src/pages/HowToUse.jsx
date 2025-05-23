@@ -1,7 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import R3FBackground from '../components/R3FBackground';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/all';
 
+gsap.registerPlugin(SplitText);
+let split = SplitText.create('h1', {
+  type : 'lines, words',
+})
+s
 export default function HowToUse() {
   const navigate = useNavigate();
 
