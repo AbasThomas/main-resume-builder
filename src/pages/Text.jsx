@@ -15,7 +15,7 @@ gsap.from(split.words, {
   return (
     <div className='text flex gap-[5px] text-4xl font-bold justify-center items-center
     mt-[250px]'>
-        <div className="lines">
+        
         <div className='word flex'>
                 <div className="letter">b</div>
                 <div className="letter">r</div>
@@ -39,7 +39,7 @@ gsap.from(split.words, {
             <div className="letter">d</div>
             <div className="letter">s</div>
         </div>    
-</div>
+
         <div className='word flex'>   
             <div className="letter">w</div>
             <div className="letter">i</div>
@@ -53,8 +53,8 @@ gsap.from(split.words, {
             <div className="letter">a</div>
             <div className="letter">p</div>
         </div>
-        
         <div className='word flex'>   
+
             <div className="letter">a</div>
             <div className="letter">n</div>
             <div className="letter">d</div>
