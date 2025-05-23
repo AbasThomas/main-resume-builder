@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@react-three/drei": "^10.0.8",
     "@react-three/fiber": "^9.1.2",
+    "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.1.7",
     "@types/three": "^0.176.0",
     "framer-motion": "^12.12.1",
