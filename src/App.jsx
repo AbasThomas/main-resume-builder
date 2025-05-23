@@ -22,7 +22,6 @@ export default function App() {
         />
         <Route path="/builder" element={<ResumeBuilder />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-        <div className='box '></div>
       </Routes>
     </BrowserRouter>
   );
