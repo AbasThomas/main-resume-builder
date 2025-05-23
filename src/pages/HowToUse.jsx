@@ -57,7 +57,7 @@ export default function HowToUse() {
           <div  className="mb-6 p-4  rounded-lg shadow-lg">
             <div             style={{
               filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
-            }} className='border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-self-center justify-center'>{step}</div>
+            }} className=' runner '>{step}</div>
             <h2 className="text-2xl font-semibold">{title}</h2>
             <p className="mt-2 text-lg">{description}</p>
           </div>
