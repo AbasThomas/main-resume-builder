@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import R3FBackground from '../components/R3FBackground';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/all';
-
+import '../animations/Gsap'
 gsap.registerPlugin(SplitText);
 let split = SplitText.create('h1', {
   type : 'lines, words',
@@ -57,7 +57,7 @@ export default function HowToUse() {
           <div  className="mb-6 p-4  rounded-lg shadow-lg">
             <div             style={{
               filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
-            }} className=' runner '>{step}</div>
+            }} className='.create border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-self-center justify-center'>{step}</div>
             <h2 className="text-2xl font-semibold">{title}</h2>
             <p className="mt-2 text-lg">{description}</p>
           </div>

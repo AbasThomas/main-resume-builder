@@ -6,7 +6,7 @@ import HowToUse from './pages/HowToUse';
 import ResumeBuilder from './pages/ResumeBuilder';
 import LoaderScreen from './components/LoaderScreen';
 import './App.css';
-
+import './animations/Gsap'
 export default function App() {
   const [showLoader, setShowLoader] = useState(false);
 
@@ -22,6 +22,7 @@ export default function App() {
         />
         <Route path="/builder" element={<ResumeBuilder />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <div className='box '></div>
       </Routes>
     </BrowserRouter>
   );
