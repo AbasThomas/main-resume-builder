@@ -1,8 +1,7 @@
-import React from 'react';
 import { useEffect } from 'react';
+import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import R3FBackground from '../components/R3FBackground';
-import { gsap } from 'gsap';
 import { SplitText } from 'gsap/all';
 import '../animations/Gsap'
 // gsap.registerPlugin(SplitText);
