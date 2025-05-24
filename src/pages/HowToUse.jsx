@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import R3FBackground from '../components/R3FBackground';
 import { gsap } from 'gsap';
@@ -18,6 +19,16 @@ import '../animations/Gsap'
 //         from : "random"
 //     }
 // })
+  useEffect(() => {
+    gsap.to('.box', {
+      x: 20,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power2.out',
+    });
+  }, []);
+
+
 export default function HowToUse() {
   const navigate = useNavigate();
 
@@ -54,14 +65,23 @@ export default function HowToUse() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
         <h1 className="text-4xl sm:text-4xl font-bold mb-4">How To Use</h1>
         {steps.map(({ step, title, description }) => (
-          <div  className="mb-6 p-4  rounded-lg shadow-lg">
-            <div             style={{
-              filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
-            }} className='.create border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-self-center justify-center'>{step}</div>
+          <div
+            key={step} // ✅ Add key here (assuming 'step' is unique)
+            className="box mb-6 p-4 rounded-lg shadow-lg"
+          >
+            <div
+              style={{
+                filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
+              }}
+              className="create border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-center"
+            >
+              {step}
+            </div>
             <h2 className="text-2xl font-semibold">{title}</h2>
             <p className="mt-2 text-lg">{description}</p>
           </div>
         ))}
+
         <button
           onClick={handleProceed}
           className="px-6 py-3 rounded-full text-lg font-bold bg-yellow-300 text-black hover:bg-yellow-400 transition"

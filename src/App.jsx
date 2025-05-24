@@ -15,8 +15,8 @@ export default function App() {
     <BrowserRouter>
       {showLoader && <LoaderScreen onComplete={() => setShowLoader(false)} />}
       <Routes>
-        <Route path ="/" element = {<Text/>}/>
-        <Route path="/home" element={<HomePage />} />
+        <Route path ="/test" element = {<Text/>}/>
+        <Route path="/" element={<HomePage />} />
         <Route path="/how-to-use" element={<HowToUse />} />
         <Route
           path="/loader"
