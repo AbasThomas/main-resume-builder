@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import R3FBackground from '../components/R3FBackground';
-import { gsap } from 'gsap';
 import { SplitText } from 'gsap/all';
 import '../animations/Gsap'
+import gsap from 'gsap';
 // gsap.registerPlugin(SplitText);
 // let split = SplitText.create('h1', {
 //   type : 'lines, words',
@@ -18,30 +18,42 @@ import '../animations/Gsap'
 //         from : "random"
 //     }
 // })
-gsap.to(".box", { x: 200 })
+// gsap.to(".box", { x: 200 })  
 
 
 export default function HowToUse() {
   const navigate = useNavigate();
+//   useEffect(()=> {
+//   gsap.fromTo('.box',{
+//     opacity:1,
+//     duration:1,
+//     y:-500,
+//   },{
+//     y:100,
+//     stagger:0.4,
 
+    
+//   }
+// )
+// },[]);
   const handleProceed = () => {
     navigate('/loader');
   };
   const steps =[
     {
       step: '1',
-      title: ' Choose a Template',
-      description: 'Select a template that suits your style and profession.',
-    },
-    {
-      step: '2',
       title: ' Fill in Your Details',
       description: 'Enter your personal information, work experience, and skills.',
     },
     {
-      step: '3',
+      step: '2',
       title: ' Customize Your Resume',
       description: 'Adjust colors, fonts, and layout to match your preferences.',
+    },
+        {
+    step: '3',
+      title: ' Choose a Template',
+      description: 'Select a template that suits your style and profession.',
     },
     {
       step: '4',
@@ -58,9 +70,7 @@ export default function HowToUse() {
         <h1 className="text-4xl sm:text-4xl font-bold mb-4">How To Use</h1>
         {steps.map(({ step, title, description }) => (
           <div  className="box mb-6 p-4  rounded-lg shadow-lg">
-            <div             style={{
-              filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)',
-            }} className='.create border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-self-center justify-center'>{step}</div>
+            <div style={{ filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)', }} className='.create border-5 border-yellow-300 rounded-full w-10 h-10 flex items-center justify-self-center justify-center'>{step}</div>
             <h2 className="text-2xl font-semibold">{title}</h2>
             <p className="mt-2 text-lg">{description}</p>
           </div>

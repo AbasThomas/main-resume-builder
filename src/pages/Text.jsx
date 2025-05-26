@@ -67,21 +67,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 function ScrollSection() {
   useEffect(() => {
-    gsap.from(".scroll-box", {
+    gsap.to(".scroll-box", {
       scrollTrigger: {
         trigger: ".scroll-box", // the element that triggers the animation
-        start: "top 80%",       // when top of .scroll-box hits 80% of viewport
+        start: "top 50%",       // when top of .scroll-box hits 80% of viewport
         toggleActions: "play none none none", // onEnter, onLeave, onEnterBack, onLeaveBack
       },
-      opacity: 0,
-      y: 50,
-      duration: 1
+        opacity: 0,
+        y: 50,
+        duration: 20
     });
   }, []);
+//  useEffect(() => {
+//         gsap.fromTo(".scroll-box", {
+//             opacity : 0,
+//             y : -50
+//         },
+//         {
+//             opacity : 1,
+//             y : 0,
+//             stagger : 0.2,
+//             duration: 1,
+//              ease: "power2.out"
+
+//         }
+//         )}, []);
+
 
   return (
     <div className="h-[200vh] p-10 bg-gray-100">
-      <div className="scroll-box bg-blue-500 text-white p-10 text-center rounded shadow-md">
+      <div className="scroll-box bg-blue-500 text-white p-10 text-center rounded shadow-md hover:bg-amber-300 items-center w          ease-in-out duration-1000">
         👋 I fade in when you scroll to me!
       </div>
     </div>

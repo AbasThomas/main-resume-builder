@@ -1,4 +1,4 @@
-import gsap from "gsap";
+// import gsap from "gsap";
 // import { SplitText } from "gsap/ all";
 
 // gsap.registerPlugin(SplitText)
@@ -17,6 +17,6 @@ import gsap from "gsap";
 //         from : 'random'
 //     }
 // });
-export function Gsap() {
-    gsap.to(".box", { x: 200 })
-}
+// export function Gsap() {
+//     gsap.to(".box", { x: 200 })
+// }
