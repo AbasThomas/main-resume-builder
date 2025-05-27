@@ -2,7 +2,9 @@ import React from 'react'
 
 const ResumeBuilder = () => {
   return (
-    <div>ResumeBuilder</div>
+    <div>
+            
+    </div>
   )
 }
 

@@ -77,9 +77,10 @@ export default function HowToUse() {
         ))}
         <button
           onClick={handleProceed}
+          style={{ filter: 'drop-shadow(0 0 8px #fffb3b) drop-shadow(0 0 16px #fffb3b)', }}
           className="px-6 py-3 rounded-full text-lg font-bold bg-yellow-300 text-black hover:bg-yellow-400 transition"
         >
-          Proceed
+          Lets Get Started
         </button>
       </div>
     </div>
