@@ -63,8 +63,8 @@ const Navbar = () => {
 
         {/* Dark Mode Toggle with Icon */}
         <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="w-11 h-11 flex items-center justify-center rounded-full border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black transition duration-300"
+           onClick={() => {setDarkMode(!darkMode); console.log('darkMode now:', !darkMode); }}  
+          className="w-11 h-11 flex items-center justify-center rounded-full border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:cursor-pointer hover:text-black transition duration-300"
           aria-label="Toggle dark mode"
         >
           {darkMode ?  <FaSun size={20} />  : <FaMoon size={20} /> }
