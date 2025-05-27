@@ -15,8 +15,8 @@ export default function App() {
   const [showLoader, setShowLoader] = useState(false);
 
   return (
+    <div className="App overflow-hidden">
     <BrowserRouter>
-      <Navbar />
 
       {/* Conditional loader (not routed) */}
       {showLoader && (
@@ -43,5 +43,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import R3FBackground from '../components/R3FBackground';
+import Navbar from '../components/Navbar';
 
 export default function HomePage() {
   const fullTitle = 'Craft Your Resume Like a Pro';
@@ -43,7 +44,7 @@ export default function HomePage() {
     <div className="absolute inset-0 z-0">
       <R3FBackground />
     </div>
-
+    <Navbar/>
     {/* Main Content */}
     <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
 
