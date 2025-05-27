@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(true);
+   const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     if (darkMode) {
