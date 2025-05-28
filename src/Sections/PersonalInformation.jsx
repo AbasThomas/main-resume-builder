@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 
-const PersonalInfoForm = ({ onChange, onNext }) => {
+const PersonalInfoForm = ({ onNext }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -19,16 +19,13 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
     if (name === 'profileImage') {
       const imageFile = files[0];
       setFormData((prev) => ({ ...prev, profileImage: imageFile }));
-      if (onChange) onChange({ ...formData, profileImage: imageFile });
     } else {
-      const updatedForm = { ...formData, [name]: value };
-      setFormData(updatedForm);
-      if (onChange) onChange(updatedForm);
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleNext = () => {
-    if (onNext) onNext(formData);
+    if (onNext) onNext(); // only trigger progress when button is clicked
   };
 
   return (
@@ -53,7 +50,6 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
             )}
           </div>
 
-          {/* Custom Upload Button */}
           <label
             htmlFor="profileImage"
             className="cursor-pointer bg-yellow-300 text-black text-xs px-3 py-1 rounded-md hover:bg-yellow-400 transition"
@@ -171,4 +167,3 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
 };
 
 export default PersonalInfoForm;
- 
