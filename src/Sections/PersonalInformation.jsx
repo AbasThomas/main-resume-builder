@@ -171,3 +171,4 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
 };
 
 export default PersonalInfoForm;
+ 
