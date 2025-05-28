@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 
 const PersonalInfoForm = ({ onChange, onNext }) => {
   const [formData, setFormData] = useState({
@@ -32,16 +32,16 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
   };
 
   return (
-    <form className="bg-[#2e2f34] p-6 rounded-xl text-white w-full max-w-[950px] mx-auto shadow-lg">
-      <h2 className="text-3xl font-bold mb-6 text-center text-yellow-300">
+    <form className="bg-[#2e2f34] p-4 rounded-lg text-white w-full max-w-[950px] mx-auto shadow-lg max-h-[85vh] overflow-y-auto">
+      <h2 className="text-2xl font-bold mb-4 text-center text-yellow-300">
         <FontAwesomeIcon icon={faUser} className="mr-2" />
         Personal Information
       </h2>
 
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-4">
         {/* Profile Image Section */}
-        <div className="flex flex-col items-center gap-3">
-          <div className="bg-gray-700 rounded-full w-[130px] h-[130px] flex justify-center items-center overflow-hidden">
+        <div className="flex flex-col items-center gap-2">
+          <div className="bg-gray-700 rounded-full w-[100px] h-[100px] flex justify-center items-center overflow-hidden">
             {formData.profileImage ? (
               <img
                 src={URL.createObjectURL(formData.profileImage)}
@@ -49,112 +49,121 @@ const PersonalInfoForm = ({ onChange, onNext }) => {
                 className="w-full h-full object-cover rounded-full"
               />
             ) : (
-              <FontAwesomeIcon icon={faUser} className="text-5xl text-[#95989B]" />
+              <FontAwesomeIcon icon={faUser} className="text-3xl text-[#95989B]" />
             )}
           </div>
+
+          {/* Custom Upload Button */}
+          <label
+            htmlFor="profileImage"
+            className="cursor-pointer bg-yellow-300 text-black text-xs px-3 py-1 rounded-md hover:bg-yellow-400 transition"
+          >
+            Upload Photo
+          </label>
           <input
+            id="profileImage"
             type="file"
             name="profileImage"
             accept="image/*"
             onChange={handleChange}
-            className="text-sm"
+            className="hidden"
           />
         </div>
 
         {/* Input Fields */}
-        <div className="flex-1 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex-1 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="block mb-1 text-sm">Full Name</label>
+              <label className="block mb-1 text-xs">Full Name</label>
               <input
                 type="text"
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                className="w-full p-2 bg-gray-800 rounded-md text-sm"
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm">Email</label>
+              <label className="block mb-1 text-xs">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="rescraft@example.com"
-                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                className="w-full p-2 bg-gray-800 rounded-md text-sm"
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm">Phone Number</label>
+              <label className="block mb-1 text-xs">Phone</label>
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+234 000 000 000"
-                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                className="w-full p-2 bg-gray-800 rounded-md text-sm"
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm">Country</label>
+              <label className="block mb-1 text-xs">Country</label>
               <input
                 type="text"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
                 placeholder="Nigeria"
-                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                className="w-full p-2 bg-gray-800 rounded-md text-sm"
               />
             </div>
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">Address</label>
+            <label className="block mb-1 text-xs">Address</label>
             <textarea
               name="location"
               value={formData.location}
               onChange={handleChange}
               rows={2}
               placeholder="123, Awesome Street, Lagos"
-              className="w-full p-2 bg-gray-800 rounded-md text-white"
+              className="w-full p-2 bg-gray-800 rounded-md text-sm"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">LinkedIn Profile URL</label>
+            <label className="block mb-1 text-xs">LinkedIn URL</label>
             <input
               type="url"
               name="linkedin"
               value={formData.linkedin}
               onChange={handleChange}
               placeholder="linkedin.com/in/johndoe"
-              className="w-full p-2 bg-gray-800 rounded-md text-white"
+              className="w-full p-2 bg-gray-800 rounded-md text-sm"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-sm">Professional Summary</label>
+            <label className="block mb-1 text-xs">Professional Summary</label>
             <textarea
               name="professionalSummary"
               value={formData.professionalSummary}
               onChange={handleChange}
-              rows={4}
-              placeholder="Write a compelling summary of your professional background and key strengths..."
-              className="w-full p-2 bg-gray-800 rounded-md text-white placeholder:text-sm"
+              rows={3}
+              placeholder="Write a compelling summary of your professional background..."
+              className="w-full p-2 bg-gray-800 rounded-md text-sm placeholder:text-sm"
             />
           </div>
         </div>
       </div>
 
-      <div className="mt-6 justify-self-end">
+      <div className="mt-4 text-right">
         <button
           type="button"
           onClick={handleNext}
-          className="bg-yellow-300 text-black font-bold px-6 py-2 rounded-md hover:bg-yellow-400 transition"
+          className="bg-yellow-300 text-black font-semibold px-5 py-2 text-sm rounded-md hover:bg-yellow-400 transition"
         >
-          Next  <FontAwesomeIcon icon="fa-forward" />
+          Next <FontAwesomeIcon icon={faForward} className="ml-2" />
         </button>
       </div>
     </form>
