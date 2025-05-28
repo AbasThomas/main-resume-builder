@@ -4,6 +4,7 @@ import PersonalInfoForm from '../Sections/PersonalInformation';
 import WorkExperienceForm from '../Sections/WorkExperienceForm'; // <-- Create this file as given earlier
 import EducationForm from '../Sections/EducationForm';
 import SkillsForm from '../Sections/SkillsForm';
+import ReferencesForm from '../Sections/ReferencesForm';
 
 const ResumeBuilder = () => {
   const [progress, setProgress] = useState(0);
@@ -64,6 +65,12 @@ const ResumeBuilder = () => {
        {currentStep === 4 && (
           <SkillsForm
             onChange={(data) => console.log('skills Updated:', data)}
+            onNext={() => handleNext()}
+          />
+        )}
+        {currentStep === 5 && (
+          <ReferencesForm
+            onChange={(data) => console.log('references Updated:', data)}
             onNext={() => handleNext()}
           />
         )}
