@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import R3FBackground from '../components/R3FBackground';
 import PersonalInfoForm from '../Sections/PersonalInformation';
 import WorkExperienceForm from '../Sections/WorkExperienceForm'; // <-- Create this file as given earlier
+import EducationForm from '../Sections/EducationForm';
+import SkillsForm from '../Sections/SkillsForm';
 
 const ResumeBuilder = () => {
   const [progress, setProgress] = useState(0);
@@ -53,6 +55,18 @@ const ResumeBuilder = () => {
           />
         )}
 
+        {currentStep === 3 && (
+          <EducationForm
+            onChange={(data) => console.log('Education Updated:', data)}
+            onNext={() => handleNext()}
+          />
+        )}
+       {currentStep === 4 && (
+          <SkillsForm
+            onChange={(data) => console.log('skills Updated:', data)}
+            onNext={() => handleNext()}
+          />
+        )}
         {/* Future steps (Education, Skills, Summary...) go here */}
       </div>
     </div>
