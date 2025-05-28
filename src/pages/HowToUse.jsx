@@ -62,11 +62,11 @@ export default function HowToUse() {
     }
   ]
   return (
-    <div className="relative w-full h-screen text-white bg-[var(--almost-black)] overflow-hidden">
+    <div className="relative w-full h-screen text-white bg-[var(--almost-black)] overflow-hidden ">
       <div className="absolute inset-0 z-0">
         <R3FBackground blur />
       </div>
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-6 scale-[0.8]">
         <h1 className="text-4xl sm:text-4xl font-bold mb-4">How To Use</h1>
         {steps.map(({ step, title, description }) => (
           <div  className="box mb-6 p-4  rounded-lg shadow-lg">

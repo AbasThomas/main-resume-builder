@@ -21,7 +21,8 @@ const Navbar = () => {
     <div className="w-full px-6 py-4 flex items-center justify-between h-min">
       {/* Logo */}
       <div>
-        <h1 className="text-4xl font-extrabold tracking-tight">
+        <h1 className="text-4xl font-extrabold tracking-tight hover:cursor-pointer"
+        onClick={() => window.location.href = '/'}>
           <span
             className="text-white"
             style={{
@@ -69,6 +70,8 @@ const Navbar = () => {
         >
           {darkMode ?  <FaSun size={20} />  : <FaMoon size={20} /> }
         </button>
+
+        <button className=' border-2 hover:bg-yellow-300 hover:cursor-pointer '> hover me </button>
       </div>
     </div>
   );

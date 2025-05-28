@@ -45,6 +45,7 @@ export default function HomePage() {
       <R3FBackground />
     </div>
     <Navbar/>
+
     {/* Main Content */}
     <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
 
