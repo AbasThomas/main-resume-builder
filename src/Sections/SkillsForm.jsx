@@ -23,8 +23,9 @@ const SkillsForm = ({ onChange, onNext }) => {
     <form className="bg-[#2e2f34] p-6 rounded-xl text-white w-full max-w-[950px] mx-auto shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-center text-yellow-300">Skills</h2>
 
-      <SearchJobTitle onSelect={handleJobTitleSelect} />
-      <SkillTagInput skills={skills} onChange={handleSkillsChange} />
+<SearchJobTitle onSelect={handleJobTitleSelect} />
+<SkillTagInput skills={skills} onChange={handleSkillsChange} />
+
 
       <div className="flex justify-end items-center mt-6">
         <button
