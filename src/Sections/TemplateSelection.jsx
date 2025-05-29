@@ -1,14 +1,43 @@
 import React from 'react';
 
-const TemplateSelection = ({ onSelect }) => {
+const TemplateSelection = ({ onChange, onNext }) => {
   const templates = [
     {
       name: 'Modern',
       description: 'Clean, sleek layout with bold headings and minimalist design.',
-      preview: '/assets/templates/modern-preview.png', // Replace with your image
+      preview: '/assets/templates/modern-preview.png', // Replace with your actual image path
     },
-    // Add more templates here in future
+    {
+      name: 'Elegant',
+      description: 'Sophisticated design with clean lines and refined fonts.',
+      preview: '/assets/templates/elegant-preview.png',
+    },
+    {
+      name: 'Executive',
+      description: 'Professional and polished format ideal for leadership roles.',
+      preview: '/assets/templates/executive-preview.png',
+    },
+    {
+      name: 'Expressive',
+      description: 'Creative layout with eye-catching visual structure.',
+      preview: '/assets/templates/expressive-preview.png',
+    },
+    {
+      name: 'Distinct',
+      description: 'Unique design with emphasis on individuality and bold formatting.',
+      preview: '/assets/templates/distinct-preview.png',
+    },
+    {
+      name: 'Bold',
+      description: 'Strong and confident look with impactful typography.',
+      preview: '/assets/templates/bold-preview.png',
+    },
   ];
+
+  const handleSelect = (templateName) => {
+    onChange(templateName); // Pass template name to parent
+    onNext(); // Move to next step
+  };
 
   return (
     <div className="bg-[#2e2f34] p-6 rounded-xl text-white w-full max-w-[950px] mx-auto shadow-lg">
@@ -19,7 +48,7 @@ const TemplateSelection = ({ onSelect }) => {
           <div
             key={template.name}
             className="bg-gray-800 p-4 rounded-lg cursor-pointer hover:ring-2 hover:ring-yellow-300 transition"
-            onClick={() => onSelect(template.name)}
+            onClick={() => handleSelect(template.name)}
           >
             <img
               src={template.preview}
