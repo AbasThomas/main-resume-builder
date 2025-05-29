@@ -1,13 +1,12 @@
 // src/context/ResumeContext.jsx
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-// Create context
-export const ResumeContext = createContext();
+const ResumeContext = createContext();
 
-// Provider component
+export const useResume = () => useContext(ResumeContext);
+
 export const ResumeProvider = ({ children }) => {
   const [resumeData, setResumeData] = useState({});
-
   return (
     <ResumeContext.Provider value={{ resumeData, setResumeData }}>
       {children}

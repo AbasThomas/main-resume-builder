@@ -1,41 +1,38 @@
 // src/pages/ResumePreview.jsx
-import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
-import { ResumeContext } from '../context/ResumeContext';
-import Bold from '../components/Templates/Bold';
-import Elegant from '../components/Templates/Elegant';
-import Executive from '../components/Templates/Executive';
+import React from 'react';
+import { useResume } from '../context/ResumeContext';
+import { useNavigate } from 'react-router-dom';
+
+import Bold from '../Templates/Bold';
+import Elegant from '../Templates/Elegant';
+import Executive from '../Templates/Executive';
+import Expressive from '../Templates/Expressive';
+import Distinct from '../Templates/Distinct';
 
 const ResumePreview = () => {
-  const { resumeData } = useContext(ResumeContext);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const selectedTemplate = searchParams.get('template') || 'bold';
+  const { resumeData } = useResume();
+  const navigate = useNavigate();
 
   const renderTemplate = () => {
-    switch (selectedTemplate.toLowerCase()) {
-      case 'elegant':
-        return <Elegant data={resumeData} />;
-      case 'executive':
-        return <Executive data={resumeData} />;
-      case 'bold':
-      default:
-        return <Bold data={resumeData} />;
+    switch (resumeData.template) {
+      case 'Elegant': return <Elegant data={resumeData} />;
+      case 'Executive': return <Executive data={resumeData} />;
+      case 'Expressive': return <Expressive data={resumeData} />;
+      case 'Distinct': return <Distinct data={resumeData} />;
+      default: return <Bold data={resumeData} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold">Resume Preview</h1>
+    <div className="bg-gray-100 min-h-screen p-6">
+      <div className="max-w-4xl mx-  bg-white rounded-lg shadow-xl p-8 relative">
         <button
-          onClick={() => window.print()}
-          className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+          onClick={() => navigate('/builder')}
+          className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
         >
-          Print / Save as PDF
+          Edit
         </button>
-      </div>
-      <div className="flex justify-center">
+        <h2 className="text-center text-2xl font-bold mb-4">Your Resume</h2>
         {renderTemplate()}
       </div>
     </div>
