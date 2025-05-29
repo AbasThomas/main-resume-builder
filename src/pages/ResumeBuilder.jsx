@@ -35,7 +35,7 @@
 
     // Dynamically render the selected template
     const renderSelectedTemplate = () => {
-      const selected = resumeData?.template || 'Modern';
+      const selected = resumeData?.template || 'bold';
 
       switch (selected) {
         case 'Elegant':

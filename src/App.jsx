@@ -18,6 +18,7 @@ import Modern from './Templates/Modern';
 import ElegantTemplate from './Templates/Elegant';
 import Executive from './Templates/Executive';
 import Expressive from './Templates/Expressive';
+import ResumePreview from './pages/ResumePreview';
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(false);
@@ -44,7 +45,9 @@ export default function App() {
         <Route path="/elegant" element={<ElegantTemplate/>} />
         <Route path="/executive" element={<Executive/>} />
         <Route path="/expressive" element={<Expressive/>} />
+        <Route path="/preview" element={<ResumePreview />} />
 
+        
 
 
         <Route path="/test" element={<Text />} />

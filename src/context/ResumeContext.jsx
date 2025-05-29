@@ -1,26 +1,15 @@
-import React, { createContext, useContext, useState } from 'react';
+// src/context/ResumeContext.jsx
+import React, { createContext, useState } from 'react';
 
-const ResumeContext = createContext();
+// Create context
+export const ResumeContext = createContext();
 
-export const useResume = () => useContext(ResumeContext);
-
+// Provider component
 export const ResumeProvider = ({ children }) => {
   const [resumeData, setResumeData] = useState({});
-  const [selectedTemplate, setSelectedTemplate] = useState('Modern');
-
-  const updateSection = (section, data) => {
-    setResumeData((prev) => ({ ...prev, [section]: data }));
-  };
-
-  const value = {
-    resumeData,
-    selectedTemplate,
-    setSelectedTemplate,
-    updateSection,
-  };
 
   return (
-    <ResumeContext.Provider value={value}>
+    <ResumeContext.Provider value={{ resumeData, setResumeData }}>
       {children}
     </ResumeContext.Provider>
   );
