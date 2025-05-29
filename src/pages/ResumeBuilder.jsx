@@ -1,6 +1,6 @@
 // src/pages/ResumeBuilder.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
 
 import R3FBackground from '../components/R3FBackground';
@@ -35,7 +35,22 @@ const ResumeBuilder = () => {
       <div className="absolute inset-0 z-0">
         <R3FBackground blur />
       </div>
-
+      <div className="action-btn text-black flex flex-col gap-3">
+        <div>
+          <button className="preview-resume-btn bg-yellow-300 hover:cursor-pointer  hover:bg-yellow-400 px-3.5 py-2 rounded-[8px] text-[16px] font-semibold cursor-pointer  text-black text-xs  ">
+            Preview Resume
+          </button>
+        </div>
+        <div>
+          <button
+            className="savedraft bg-yellow-300 hover:cursor-pointer  hover:bg-yellow-400 px-6.5 py-2 rounded-[8px] text-[16px] font-semibold cursor-pointer  text-black text-xs"
+            onClick={()=> Navigate('/preview')}  
+          >
+            
+            Save as draft
+          </button>
+        </div>
+      </div>
       <div className="relative z-10 w-full max-w-[1000px] px-4 py-8">
         {/* Progress Bar */}
         {currentStep < 6 && (
@@ -85,6 +100,7 @@ const ResumeBuilder = () => {
           />
         )}
       </div>
+
     </div>
   );
 };

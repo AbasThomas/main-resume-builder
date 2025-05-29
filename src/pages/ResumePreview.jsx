@@ -28,7 +28,7 @@ const ResumePreview = () => {
       <div className="max-w-4xl mx-  bg-white rounded-lg shadow-xl p-8 relative">
         <button
           onClick={() => navigate('/builder')}
-          className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          className="absolute top-4 right-4  bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
         >
           Edit
         </button>
