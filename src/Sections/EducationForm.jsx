@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {  faForward } from '@fortawesome/free-solid-svg-icons';
 
 const EducationForm = ({ onChange, onNext }) => {
   const [educationList, setEducationList] = useState([
@@ -167,7 +168,7 @@ const EducationForm = ({ onChange, onNext }) => {
           onClick={handleNext}
           className="bg-yellow-300 text-black font-bold px-6 py-2 rounded-md hover:bg-yellow-400 transition"
         >
-          Next
+          Next <FontAwesomeIcon icon={faForward} className="ml-2" />
         </button>
       </div>
     </form>

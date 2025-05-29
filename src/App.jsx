@@ -10,6 +10,11 @@ import Navbar from './components/Navbar';
 
 import './App.css';
 import './animations/Gsap';
+import ModernResume from './components/templates/ModernResume';
+import Bold from './Templates/Bold';
+import Classic from './Templates/Classic';
+import Distinct from './Templates/Distinct';
+import Modern from './Templates/Modern';
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(false);
@@ -29,6 +34,12 @@ export default function App() {
 
       {/* Routes */}
       <Routes>
+        <Route path="/bold" element={<Bold/>} />
+        <Route path="/classic" element={<Classic/>} />
+        <Route path="/distinct" element={<Distinct/>} />
+        <Route path="/Modern" element={<Modern/>} />
+
+
         <Route path="/test" element={<Text />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/how-to-use" element={<HowToUse />} />

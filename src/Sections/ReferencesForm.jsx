@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserTie, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { faUserTie, faPlus, faTrash, faForward} from '@fortawesome/free-solid-svg-icons';
 const ReferencesForm = ({ onChange, onNext }) => {
   const [references, setReferences] = useState([
     { name: '', position: '', company: '', email: '', phone: '' },
@@ -122,7 +121,7 @@ const ReferencesForm = ({ onChange, onNext }) => {
           onClick={handleNext}
           className="bg-yellow-300 text-black font-bold px-6 py-2 rounded-md hover:bg-yellow-400 transition"
         >
-          Next
+          Next <FontAwesomeIcon icon={faForward} className="ml-2" />
         </button>
       </div>
     </form>

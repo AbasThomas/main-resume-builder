@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import R3FBackground from '../components/R3FBackground';
 import PersonalInfoForm from '../Sections/PersonalInformation';
-import WorkExperienceForm from '../Sections/WorkExperienceForm'; // <-- Create this file as given earlier
+import WorkExperienceForm from '../Sections/WorkExperienceForm';
 import EducationForm from '../Sections/EducationForm';
 import SkillsForm from '../Sections/SkillsForm';
 import ReferencesForm from '../Sections/ReferencesForm';
+import TemplateSelection from '../Sections/TemplateSelection';
+import ModernResume from '../components/templates/ModernResume'; // Adjust path if needed
 
 const ResumeBuilder = () => {
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
+  const [resumeData, setResumeData] = useState({});
+  const [showPreview, setShowPreview] = useState(false);
 
-  // Update progress ONLY when Next is clicked
   const handleNext = () => {
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
 
-    // Assuming total of 5 steps, increase progress by 20% per step
     const stepProgress = (nextStep - 1) * 20;
     setProgress(stepProgress);
   };
@@ -44,38 +46,77 @@ const ResumeBuilder = () => {
         {/* Step-based Form Rendering */}
         {currentStep === 1 && (
           <PersonalInfoForm
-            onChange={(data) => console.log('Personal Info Updated:', data)}
-            onNext={() => handleNext()}
+            onChange={(data) => setResumeData((prev) => ({ ...prev, personalInfo: data }))}
+            onNext={handleNext}
           />
         )}
 
         {currentStep === 2 && (
           <WorkExperienceForm
-            onChange={(data) => console.log('Work Experience Updated:', data)}
-            onNext={() => handleNext()}
+            onChange={(data) => setResumeData((prev) => ({ ...prev, experiences: data }))}
+            onNext={handleNext}
           />
         )}
 
         {currentStep === 3 && (
           <EducationForm
-            onChange={(data) => console.log('Education Updated:', data)}
-            onNext={() => handleNext()}
+            onChange={(data) => setResumeData((prev) => ({ ...prev, education: data }))}
+            onNext={handleNext}
           />
         )}
-       {currentStep === 4 && (
+
+        {currentStep === 4 && (
           <SkillsForm
-            onChange={(data) => console.log('skills Updated:', data)}
-            onNext={() => handleNext()}
+            onChange={(data) => setResumeData((prev) => ({ ...prev, skills: data }))}
+            onNext={handleNext}
           />
         )}
+
         {currentStep === 5 && (
           <ReferencesForm
-            onChange={(data) => console.log('references Updated:', data)}
-            onNext={() => handleNext()}
+            onChange={(data) => setResumeData((prev) => ({ ...prev, references: data }))}
+            onNext={handleNext}
           />
         )}
-        {/* Future steps (Education, Skills, Summary...) go here */}
+
+        {currentStep === 6 && (
+          <TemplateSelection
+            onChange={(data) => setResumeData((prev) => ({ ...prev, template: data }))}
+            onNext={handleNext}
+          />
+        )}
+
+        {/* Preview Resume Button */}
+        {currentStep === 6 && (
+          <div className="mt-10 text-center">
+            <button
+              onClick={() => setShowPreview(true)}
+              className="bg-yellow-400 text-black font-bold py-3 px-6 rounded-md hover:bg-yellow-500 transition"
+            >
+              Preview Resume
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Resume Preview Modal */}
+      {showPreview && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-6">
+          <div className="bg-white rounded-lg shadow-xl overflow-auto max-h-[90vh] max-w-[900px] w-full p-8">
+            <div className="text-right">
+              <button
+                onClick={() => setShowPreview(false)}
+                className="text-red-600 font-bold text-lg"
+              >
+                ✕ Close
+              </button>
+            </div>
+
+            {/* Render Modern Resume Template with Data */}
+            <ModernResume data={resumeData} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -71,7 +71,7 @@ const Navbar = () => {
           {darkMode ?  <FaSun size={20} />  : <FaMoon size={20} /> }
         </button>
 
-        <button className=' border-2 hover:bg-yellow-300 hover:cursor-pointer '> hover me </button>
+        {/* <button className=' border-2 hover:bg-yellow-300 hover:cursor-pointer '> hover me </button> */}
       </div>
     </div>
   );

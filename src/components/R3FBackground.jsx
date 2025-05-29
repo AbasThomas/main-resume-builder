@@ -8,9 +8,9 @@ import * as THREE from 'three';
 export default function R3FBackground() {
   const count = 5000;
   const positions = new Float32Array(count * 3).map(() => THREE.MathUtils.randFloatSpread(10));
-
+  
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+    <Canvas camera={{ position: [0, 0, 5], fov: 75,    }}>
       <OrbitControls enableZoom={false} enablePan={false} />
       <Points positions={positions}>
         <PointMaterial
