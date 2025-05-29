@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhone, faEnvelope, faMapMarkerAlt, faLinkedin } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { icon } from '@fortawesome/fontawesome-svg-core'
 const Bold = () => {
     const user = [
@@ -19,6 +20,7 @@ const Bold = () => {
         },
         {
             input:'LinkedIn : JohnDoe'
+            ,icon:<FontAwesomeIcon icon={faLinkedinIn} />
         }
     ]
     const skill =[
@@ -51,7 +53,9 @@ const Bold = () => {
         <div className='flex gap-3 justify-self-start mt-[20px]'>
         {user.map(({ input}) => (
           <div  className="bg-gray-200 p-2 rounded-[8px] flex items-center ">
-            <div className='icon w-8 h-8 bg-white rounded-full mr-1.5'></div>
+            <div className='icon w-8 h-8 bg-white rounded-full mr-1.5'>
+                {icon}
+            </div>
             
             <p className='font-semibold'>{input}</p>
           </div>
