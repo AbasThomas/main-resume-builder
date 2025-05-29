@@ -15,6 +15,7 @@ import Bold from './Templates/Bold';
 import Classic from './Templates/Classic';
 import Distinct from './Templates/Distinct';
 import Modern from './Templates/Modern';
+import ElegantTemplate from './Templates/Elegant';
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(false);
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/classic" element={<Classic/>} />
         <Route path="/distinct" element={<Distinct/>} />
         <Route path="/Modern" element={<Modern/>} />
+        <Route path="/elegant" element={<ElegantTemplate/>} />
 
 
         <Route path="/test" element={<Text />} />

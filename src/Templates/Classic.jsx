@@ -1,156 +1,155 @@
-import React from 'react'
+import React from 'react';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin } from 'react-icons/fa';
 
 const Classic = () => {
-    const user = [
-        {
-            input:'010 1010 100 10'
-        },
-        
-        {
-            input:'ResCraft@gmail.com'
-        }, 
-        {
-            input:'Lagos Nigeria'
-        },
-        {
-            input:'LinkedIn : JohnDoe'
-        }
-    ]
-    const skill =[
-        {
-            skills:'Teamwork'
-        },
-        {
-            skills:'Customer Service'
-        },
-        {
-            skills:'Multitasking'
-        },
-        {
-            skills:'Friendly'
-        }
-        
+  const contact = [
+    {
+      icon: <FaPhone />,
+      text: '010 1010 100 10',
+    },
+    {
+      icon: <FaEnvelope />,
+      text: 'ResCraft@gmail.com',
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      text: 'Lagos, Nigeria',
+    },
+    {
+      icon: <FaLinkedin />,
+      text: 'LinkedIn: JohnDoe',
+    },
+  ];
 
-    ]
+  const skills = [
+    'Teamwork',
+    'Customer Service',
+    'Multitasking',
+    'Friendly',
+  ];
+
+  const experiences = [
+    {
+      company: 'ResCraft',
+      position: 'Software Engineer',
+      start: 'July 2020',
+      end: 'August 2024',
+      responsibilities: [
+        'Worked with coworkers to complete tasks',
+        'Demonstrated ability to manage multiple tasks',
+        'Responded quickly to meet customer needs',
+      ],
+    },
+    {
+      company: 'ResBuild',
+      position: 'Database Engineer',
+      start: 'July 2021',
+      end: 'August 2023',
+      responsibilities: [
+        'Worked with coworkers to complete tasks',
+        'Demonstrated ability to manage multiple tasks',
+        'Responded quickly to meet customer needs',
+      ],
+    },
+  ];
+
+  const education = [
+    {
+      degree: 'High School Diploma',
+      institution: 'Catholic Boys Secondary School',
+      start: 'July 1991',
+      end: 'August 1997',
+    },
+    {
+      degree: 'BSc',
+      institution: 'University of Lagos - Currently Studying',
+      start: 'July 2019',
+      end: 'August 2026',
+    },
+  ];
+
   return (
-    <div className="w-[900px] mx-auto p-10 bg-white text-black font-sans border-b-3 mb-10 border-gray-400">
-        {/* Header */}
-        <div className=' bg-purple-500 text-white border-gray-400 p-8 flex justify-center text-center'>
-            <div>
-                <h2 className='text-4xl font-bold border-b-2 pb-2'>ABAS THOMAS</h2>
-                <p className='text-[20px]  font-semibold mt-1.5'>Software Devloper</p>
-            </div>
-            {/* <div className='w-30 h-30  bg-gray-300 rounded-full'><img src="#" alt="profile-img" /></div> */}
-        </div>
-        {/* contact */}
-        <div className='flex gap-3 justify-self-start mt-[20px]'>
-        {user.map(({ input}) => (
-          <div  className="p-2 rounded-[8px] flex items-center justify-center ">
-            <div className='icon w-8 h-8 bg-white rounded-full mr-1.5'></div>
-            <p className='font-semibold'>{input}</p>
+    <div className="w-[900px] mx-auto p-10 bg-white text-black font-sans mb-10">
+      {/* Header */}
+      <div className="bg-purple-500 text-white p-8 text-center">
+        <h2 className="text-4xl font-bold border-b-2 pb-2">ABAS THOMAS</h2>
+        <p className="text-[20px] font-semibold mt-1.5">Software Developer</p>
+      </div>
+
+      {/* Contact Section */}
+      <div className="flex flex-wrap gap-4 mt-5">
+        {contact.map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <div className="text-purple-600 text-lg">{item.icon}</div>
+            <p className="font-semibold text-[17px]">{item.text}</p>
           </div>
         ))}
-        </div>
+      </div>
 
-        <div className="professionalSumm">
-            <div className='  py-2.5'><h1 className=' uppercase text-[22px] '>Professional Summary</h1></div>
-            <p className='mt-[10px] text-[18px]'>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa temporibus tenetur possimus autem omnis tempora eum ab fuga soluta excepturi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem explicabo dolor blanditiis cum nisi mollitia.
-            </p>
-        </div>
-        <div className="skills">
-        <div className=' py-2.5'><h1 className='uppercase text-[22px]'>Skills</h1></div>
-        <div className=' justify-self-start mt-[5px]'>
+      {/* Professional Summary */}
+      <section className="mt-8">
+        <h3 className="uppercase text-[22px] font-semibold border-b-2">Professional Summary</h3>
+        <p className="mt-3 text-[18px] leading-7">
+          Motivated and adaptable Software Developer with experience delivering scalable web applications. Proven ability to collaborate with cross-functional teams and manage multiple tasks under pressure while maintaining high quality standards.
+        </p>
+      </section>
 
-        {skill.map(({ skills}) => (
-          <div  className=" p-2 ">
-            <li  className='font-semibold'>{skills}</li>
+      {/* Skills */}
+      <section className="mt-8">
+        <h3 className="uppercase text-[22px] font-semibold border-b-2">Skills</h3>
+        <ul className="mt-3 grid grid-cols-2 gap-2 list-disc pl-5 text-[18px]">
+          {skills.map((skill, index) => (
+            <li key={index}>{skill}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Experience */}
+      <section className="mt-8">
+        <h3 className="uppercase text-[22px] font-semibold border-b-2">Experience</h3>
+        {experiences.map((exp, index) => (
+          <div key={index} className="mt-6">
+            <div className="font-semibold text-[19px] text-purple-600">Company: {exp.company}</div>
+            <div className="flex mt-1 text-[18px]">
+              <span className="mr-2">{exp.position},</span>
+              <span>{exp.start} - {exp.end}</span>
+            </div>
+            <ul className="mt-2 list-disc pl-5 text-[17px] space-y-1">
+              {exp.responsibilities.map((task, i) => (
+                <li key={i}>{task}</li>
+              ))}
+            </ul>
           </div>
         ))}
-        </div>
-        </div>
-        <div className="experience">
-            
-            <div className=' py-2.5'><h1 className='uppercase text-[22px] '>Experience</h1></div>
-            <div className="companyPostion  items-center gap-2 mt-[20px]">
-                <div className="companyName font-semibold text-[19px] text-purple-500">Company : ResCraft</div>
-               
-            </div>
-            <div className='flex mt-[10px]'>
-                <div className="position  text-[19px] mr-2"> Software Engineer, </div>
-                <div className="year flex items-center">
-                    <div className="startdate text-[19px]">July 2020</div>
-                    -
-                    <div className="enddate text-[19px]">August 2024</div>
-                </div>
-            </div>
-        </div>
-        <div className="experience flex flex-col gap-1.5 mt-3                          ">
-            <li className='text-[18px]'>Worked with coworkers to complete tasks</li>
-            <li className='text-[18px]'>Demonstrated ability to manage mulitple tasks</li>
-            <li className='text-[18px]'>Responded quickly to meet Customer needs</li>
+      </section>
 
-        </div>
-                <div className="experience">
-            
-            <div className="companyPostion  items-center gap-2 mt-[20px]">
-                <div className="companyName font-semibold text-[19px] text-purple-500   ">Company : ResBuild</div>
-               
+      {/* Education */}
+      <section className="mt-8">
+        <h3 className="uppercase text-[22px] font-semibold border-b-2">Education</h3>
+        {education.map((edu, index) => (
+          <div key={index} className="mt-6">
+            <div className="font-semibold text-[20px] text-purple-600">{edu.degree}</div>
+            <div className="flex items-center text-[18px] mt-1">
+              <span className="font-semibold">{edu.institution}</span>
+              <span className="ml-2">({edu.start} - {edu.end})</span>
             </div>
-            <div className='flex mt-[10px]'>
-                <div className="position  text-[19px] mr-2"> Database Engineer, </div>
-                <div className="year flex items-center">
-                    <div className="startdate text-[19px]">July 2021</div>
-                    -
-                    <div className="enddate text-[19px]">August 2023</div>
-                </div>
-            </div>
-        </div>
-        <div className="skills flex flex-col gap-1.5 mt-3                          ">
-            <li className='text-[18px]'>Worked with coworkers to complete tasks</li>
-            <li className='text-[18px]'>Demonstrated ability to manage mulitple tasks</li>
-            <li className='text-[18px]'>Responded quickly to meet Customer needs</li>
+          </div>
+        ))}
+      </section>
 
+      {/* References */}
+      <section className="mt-8">
+        <h3 className="uppercase text-[22px] font-semibold border-b-2">References</h3>
+        <div className="mt-4 text-[18px] space-y-1">
+          <p><span className="font-semibold">Name:</span> Jane Doe</p>
+          <p><span className="font-semibold">Position:</span> Manager</p>
+          <p><span className="font-semibold">Company:</span> ResCraft</p>
+          <p><span className="font-semibold">Email:</span> janedoe@gmail.com</p>
+          <p><span className="font-semibold">Phone:</span> 234 100 1001 001</p>
         </div>
-        <div className="education mt-3">
-             <div className='w-[110px] py-.5'><h1 className='uppercase text-[22px] '>Education</h1></div>
-             <div className="Certificate font-semibold text-[22px] mt-[20px] text-purple-500">High School Diploma</div>
-            <div className='flex items-center gap-1.5 mt-2'>
-                <div className="institution text-[19px] font-semibold ">
-                    Catholic Boys Secondary School,  
-                </div>
-                <div className="year flex items-center">
-                        <div className="startdate text-[19px]">July 1991</div>
-                        -
-                        <div className="enddate text-[19px]">August 1997</div>
-                </div>
-            
-            </div>                
-             <div className="Certificate font-semibold text-[22px] mt-[20px] ">Bsc</div>
-            <div className='flex items-center gap-1.5 mt-2 '>
-                <div className="institution text-[19px] font-semibold">
-                    University of Lagos - <span className='italic'>Currently Studying</span>,
-                </div>
-                <div className="year flex items-center">
-                        <div className="startdate text-[19px]">July 2019</div>
-                        -
-                        <div className="enddate text-[19px]">August 2026</div>
-                </div>
-                
-            </div>           
-        </div>
-        <div className="references">
-             <div className=' w-[110px]  border-gray-400 py-.5 mt-3'><h1 className='uppercase text-[22px] '>References</h1></div>
-            <div className="reference mt-3">
-                <div className="name text-2xl font-semibold">Name: Jane Doe</div>
-                <div className="position text-[19px] mt-1"> <span className='font-semibold'>Position:</span> Manager</div>
-                <div className="company text-[19px] mt-1"> <span className='font-semibold'>Company:</span> ResCraft</div>
-                <div className="Email text-[19px] mt-1"><span className='font-semibold'>Email:</span> janedoe.@gmail.com</div>
-                <div className='phone text-[19px] mt-1'><span className='font-semibold'>Phone:</span> 234 100 1001 001</div>
-            </div>
-        </div>
+      </section>
     </div>
-  )
-}
+  );
+};
 
-export default Classic
+export default Classic;
