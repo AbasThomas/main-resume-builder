@@ -1,16 +1,21 @@
 import React from 'react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone, faEnvelope, faMapMarkerAlt, faLinkedin } from '@fortawesome/free-solid-svg-icons'
+import { icon } from '@fortawesome/fontawesome-svg-core'
 const Bold = () => {
     const user = [
         {
-            input:'010 1010 100 10'
+            input:'010 1010 100 10',
+            icon:<FontAwesomeIcon icon={faPhone} className='text-[20px] mr-1.5' />
         },
         
         {
-            input:'ResCraft@gmail.com'
+            input:'ResCraft@gmail.com',
+            icon:<FontAwesomeIcon icon={faEnvelope} className='text-[20px] mr-1.5' />
         }, 
         {
             input:'Lagos Nigeria'
+            ,icon:<FontAwesomeIcon icon={faMapMarkerAlt} className='text-[20px] mr-1.5' />
         },
         {
             input:'LinkedIn : JohnDoe'
