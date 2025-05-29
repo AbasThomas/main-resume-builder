@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import R3FBackground from '../components/R3FBackground';
+
+// Form Sections
 import PersonalInfoForm from '../Sections/PersonalInformation';
 import WorkExperienceForm from '../Sections/WorkExperienceForm';
 import EducationForm from '../Sections/EducationForm';
 import SkillsForm from '../Sections/SkillsForm';
 import ReferencesForm from '../Sections/ReferencesForm';
 import TemplateSelection from '../Sections/TemplateSelection';
-import ModernResume from '../components/templates/ModernResume'; // Adjust path if needed
+
+// Templates
+// import ModernResume from '../components/templates/ModernResume';
+import Bold from '../Templates/Bold';
+import Classic from '../Templates/Classic';
+import Distinct from '../Templates/Distinct';
+import Elegant from '../Templates/Elegant';
+import Executive from '../Templates/Executive';
+import Expressive from '../Templates/Expressive';
+
+// import Pro from '.././templates/Pro';
 
 const ResumeBuilder = () => {
   const [progress, setProgress] = useState(0);
@@ -17,9 +29,29 @@ const ResumeBuilder = () => {
   const handleNext = () => {
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
-
     const stepProgress = (nextStep - 1) * 20;
     setProgress(stepProgress);
+  };
+
+  // Dynamically render the selected template
+  const renderSelectedTemplate = () => {
+    const selected = resumeData?.template || 'Modern';
+
+    switch (selected) {
+      case 'Elegant':
+        return <Elegant data={resumeData} />;
+      case 'Executive':
+        return <Executive data={resumeData} />;
+      case 'Expressive':
+        return <Expressive data={resumeData} />;
+      case 'Distinct':
+        return <Distinct data={resumeData} />;
+      case 'Pro':
+        return <Pro data={resumeData} />;
+      case 'Modern':
+      default:
+        return <ModernResume data={resumeData} />;
+    }
   };
 
   return (
@@ -43,7 +75,7 @@ const ResumeBuilder = () => {
           <p className="mt-1 text-yellow-300 font-semibold text-sm">{progress}% Complete</p>
         </div>
 
-        {/* Step-based Form Rendering */}
+        {/* Form Steps */}
         {currentStep === 1 && (
           <PersonalInfoForm
             onChange={(data) => setResumeData((prev) => ({ ...prev, personalInfo: data }))}
@@ -81,7 +113,9 @@ const ResumeBuilder = () => {
 
         {currentStep === 6 && (
           <TemplateSelection
-            onChange={(data) => setResumeData((prev) => ({ ...prev, template: data }))}
+            onChange={(selectedTemplate) =>
+              setResumeData((prev) => ({ ...prev, template: selectedTemplate }))
+            }
             onNext={handleNext}
           />
         )}
@@ -111,9 +145,8 @@ const ResumeBuilder = () => {
                 ✕ Close
               </button>
             </div>
-
-            {/* Render Modern Resume Template with Data */}
-            <ModernResume data={resumeData} />
+            {/* 🔁 Render Template Dynamically */}
+            {renderSelectedTemplate()}
           </div>
         </div>
       )}
