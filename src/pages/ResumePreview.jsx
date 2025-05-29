@@ -8,7 +8,7 @@ import Elegant from '../Templates/Elegant';
 import Executive from '../Templates/Executive';
 import Expressive from '../Templates/Expressive';
 import Distinct from '../Templates/Distinct';
-
+import R3FBackground from '../components/R3FBackground';
 const ResumePreview = () => {
   const { resumeData } = useResume();
   const navigate = useNavigate();
@@ -24,17 +24,33 @@ const ResumePreview = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
-      <div className="max-w-4xl mx-  bg-white rounded-lg shadow-xl p-8 relative">
-        <button
+    <div className="bg-black min-h-screen p-6">
+        <div className="absolute inset-0 z-0">
+          <R3FBackground />
+      </div>
+      <div className="  w-[900px]  mx-auto rounded-lg shadow-xl p-8 relative">
+    <div className='action-btn flex justify-between items-center'>
+        <button className=" bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition cursor-pointer">
+            Export
+        </button >
+        <button className=" bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
+            Save as Draft
+        </button>
+                <button
           onClick={() => navigate('/builder')}
-          className="absolute top-4 right-4  bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          className=" bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition cursor-pointer"
         >
           Edit
         </button>
+    </div>
         <h2 className="text-center text-2xl font-bold mb-4">Your Resume</h2>
         {renderTemplate()}
       </div>
+      <div className='justify-self-center'>
+        <button className='text-black bg-yellow-300 font-semibold px-4 py-2 rounded hover:bg-yellow-400 transition cursor-pointer'>
+            Change Template
+        </button>
+    </div>
     </div>
   );
 };
