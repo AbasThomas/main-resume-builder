@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 
-const PersonalInfoForm = ({ onNext }) => {
+const PersonalInfoForm = ({ onNext, onDataChange }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -16,16 +16,16 @@ const PersonalInfoForm = ({ onNext }) => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'profileImage') {
-      const imageFile = files[0];
-      setFormData((prev) => ({ ...prev, profileImage: imageFile }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    const newFormData = {
+      ...formData,
+      [name]: name === 'profileImage' ? files[0] : value,
+    };
+    setFormData(newFormData);
+    if (onDataChange) onDataChange(newFormData);
   };
 
   const handleNext = () => {
-    if (onNext) onNext(); // only trigger progress when button is clicked
+    if (onNext) onNext();
   };
 
   return (
@@ -36,20 +36,19 @@ const PersonalInfoForm = ({ onNext }) => {
       </h2>
 
       <div className="flex flex-col md:flex-row gap-4">
-        {/* Profile Image Section */}
+        {/* Profile Image Upload */}
         <div className="flex flex-col items-center gap-2">
-          <div className="bg-gray-700 rounded-full w-[100px] h-[100px] flex justify-center items-center overflow-hidden">
+          <div className="bg-gray-700 rounded-full w-[100px] h-[100px] overflow-hidden flex justify-center items-center">
             {formData.profileImage ? (
               <img
                 src={URL.createObjectURL(formData.profileImage)}
-                alt="Profile Preview"
-                className="w-full h-full object-cover rounded-full"
+                alt="Profile"
+                className="object-cover w-full h-full rounded-full"
               />
             ) : (
               <FontAwesomeIcon icon={faUser} className="text-3xl text-[#95989B]" />
             )}
           </div>
-
           <label
             htmlFor="profileImage"
             className="cursor-pointer bg-yellow-300 text-black text-xs px-3 py-1 rounded-md hover:bg-yellow-400 transition"
@@ -69,50 +68,19 @@ const PersonalInfoForm = ({ onNext }) => {
         {/* Input Fields */}
         <div className="flex-1 space-y-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div>
-              <label className="block mb-1 text-xs">Full Name</label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="John Doe"
-                className="w-full p-2 bg-gray-800 rounded-md text-sm"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-xs">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="rescraft@example.com"
-                className="w-full p-2 bg-gray-800 rounded-md text-sm"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-xs">Phone</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+234 000 000 000"
-                className="w-full p-2 bg-gray-800 rounded-md text-sm"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-xs">Country</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="Nigeria"
-                className="w-full p-2 bg-gray-800 rounded-md text-sm"
-              />
-            </div>
+            {['fullName', 'email', 'phone', 'address'].map((field) => (
+              <div key={field}>
+                <label className="block mb-1 text-xs capitalize">{field.replace(/([A-Z])/g, ' $1')}</label>
+                <input
+                  type={field === 'email' ? 'email' : 'text'}
+                  name={field}
+                  value={formData[field]}
+                  onChange={handleChange}
+                  className="w-full p-2 bg-gray-800 rounded-md text-sm"
+                  placeholder={field === 'email' ? 'rescraft@example.com' : ''}
+                />
+              </div>
+            ))}
           </div>
 
           <div>
@@ -146,8 +114,8 @@ const PersonalInfoForm = ({ onNext }) => {
               value={formData.professionalSummary}
               onChange={handleChange}
               rows={3}
-              placeholder="Write a compelling summary of your professional background..."
-              className="w-full p-2 bg-gray-800 rounded-md text-sm placeholder:text-sm"
+              placeholder="Write a compelling summary..."
+              className="w-full p-2 bg-gray-800 rounded-md text-sm"
             />
           </div>
         </div>
