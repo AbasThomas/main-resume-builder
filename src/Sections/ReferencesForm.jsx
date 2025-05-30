@@ -58,4 +58,75 @@ const ReferencesForm = ({ onChange, onNext, initialData = [] }) => {
               <input
                 type="text"
                 value={ref.name}
-               
+                onChange={(e) => handleChange(index, 'name', e.target.value)}
+                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                placeholder="Jane Doe"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm">Position</label>
+              <input
+                type="text"
+                value={ref.position}
+                onChange={(e) => handleChange(index, 'position', e.target.value)}
+                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                placeholder="Senior Manager"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm">Company</label>
+              <input
+                type="text"
+                value={ref.company}
+                onChange={(e) => handleChange(index, 'company', e.target.value)}
+                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                placeholder="Awesome Corp"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm">Email</label>
+              <input
+                type="email"
+                value={ref.email}
+                onChange={(e) => handleChange(index, 'email', e.target.value)}
+                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                placeholder="jane.doe@example.com"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-sm">Phone</label>
+              <input
+                type="tel"
+                value={ref.phone}
+                onChange={(e) => handleChange(index, 'phone', e.target.value)}
+                className="w-full p-2 bg-gray-800 rounded-md text-white"
+                placeholder="+234 123 456 789"
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className="flex justify-between items-center mt-6">
+        <button
+          type="button"
+          onClick={addReference}
+          className="text-yellow-300 hover:text-yellow-400 font-medium flex items-center gap-2"
+        >
+          <FontAwesomeIcon icon={faPlus} />
+          Add Another Reference
+        </button>
+
+        <button
+          type="button"
+          onClick={handleNext}
+          className="bg-yellow-300 text-black font-bold px-6 py-2 rounded-md hover:bg-yellow-400 transition"
+        >
+          Next <FontAwesomeIcon icon={faForward} className="ml-2" />
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export default ReferencesForm;

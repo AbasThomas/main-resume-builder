@@ -1,51 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const SkillTagInput = ({ skills, onChange }) => {
-  const handleAddSkill = () => {
-    onChange([...skills, '']);
+const SearchJobTitle = ({ onSelect }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  // Sample job titles and their associated skills
+  const jobTitles = {
+    'Software Developer': ['JavaScript', 'React', 'Node.js', 'HTML/CSS', 'Git'],
+    'Data Scientist': ['Python', 'Machine Learning', 'Pandas', 'SQL', 'Statistics'],
+    'UX Designer': ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'UI Design'],
+    'Product Manager': ['Agile', 'Scrum', 'Product Strategy', 'Market Research', 'JIRA'],
+    'DevOps Engineer': ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Linux']
   };
 
-  const handleRemoveSkill = (index) => {
-    const updatedSkills = skills.filter((_, i) => i !== index);
-    onChange(updatedSkills);
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
   };
 
-  const handleSkillChange = (index, value) => {
-    const updatedSkills = [...skills];
-    updatedSkills[index] = value;
-    onChange(updatedSkills);
+  const handleSelect = (title) => {
+    setSearchTerm(title);
+    if (jobTitles[title]) {
+      onSelect(jobTitles[title]);
+    }
   };
+
+  const filteredTitles = Object.keys(jobTitles).filter(title => 
+    title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div>
-      {skills.map((skill, index) => (
-        <div key={index} className="flex items-center gap-4 mb-2">
-          <input
-            type="text"
-            value={skill}
-            onChange={(e) => handleSkillChange(index, e.target.value)}
-            placeholder="e.g., Teamwork"
-            className="flex-1 p-2 bg-gray-800 rounded-md text-white"
-          />
-          <button
-            type="button"
-            onClick={() => handleRemoveSkill(index)}
-            className="text-red-400 hover:text-red-500"
-            title="Delete skill"
-          >
-            &times;
-          </button>
-        </div>
-      ))}
-      <button
-        type="button"
-        onClick={handleAddSkill}
-        className="text-yellow-300 hover:text-yellow-400 font-medium flex items-center gap-2 mt-2"
-      >
-        + Add Another Skill
-      </button>
+    <div className="mb-6">
+      <label className="block mb-2 text-sm font-medium">
+        Search for a job title to get suggested skills:
+      </label>
+      <div className="relative">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="e.g. Software Developer"
+          className="w-full p-2 bg-gray-800 rounded-md text-white"
+        />
+        {searchTerm && filteredTitles.length > 0 && (
+          <div className="absolute z-10 w-full bg-gray-700 rounded-md shadow-lg max-h-60 overflow-y-auto">
+            {filteredTitles.map((title, index) => (
+              <div
+                key={index}
+                className="p-2 hover:bg-gray-600 cursor-pointer"
+                onClick={() => handleSelect(title)}
+              >
+                {title}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default SkillTagInput;
+export default SearchJobTitle;

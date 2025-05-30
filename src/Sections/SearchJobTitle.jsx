@@ -1,96 +1,59 @@
 import React, { useState } from 'react';
 
-const jobSkillsExamples = {
-  'Customer Service Representative': ['Active Listening', 'Empathy', 'Conflict Resolution'],
-  'Software Developer': ['Problem Solving', 'Attention to Detail', 'Collaboration'],
-  'Project Manager': ['Time Management', 'Multitasking', 'Leadership'],
-  'Marketing Specialist': ['Creativity', 'Communication', 'Campaign Planning'],
-  'Sales Executive': ['Negotiation', 'Product Knowledge', 'Persuasion'],
-  'Graphic Designer': ['Creativity', 'Typography', 'Attention to Detail'],
-};
-
-const jobTitles = Object.keys(jobSkillsExamples);
-
 const SearchJobTitle = ({ onSelect }) => {
-  const [jobTitle, setJobTitle] = useState('');
-  const [suggestedSkills, setSuggestedSkills] = useState([]);
-  const [filteredTitles, setFilteredTitles] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  // Sample job titles and their associated skills
+  const jobTitles = {
+    'Software Developer': ['JavaScript', 'React', 'Node.js', 'HTML/CSS', 'Git'],
+    'Data Scientist': ['Python', 'Machine Learning', 'Pandas', 'SQL', 'Statistics'],
+    'UX Designer': ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'UI Design'],
+    'Product Manager': ['Agile', 'Scrum', 'Product Strategy', 'Market Research', 'JIRA'],
+    'DevOps Engineer': ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Linux']
+  };
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setJobTitle(value);
-
-    if (value.trim() === '') {
-      setFilteredTitles([]);
-      setShowDropdown(false);
-    } else {
-      const matches = jobTitles.filter((title) =>
-        title.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredTitles(matches);
-      setShowDropdown(true);
-    }
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   const handleSelect = (title) => {
-    setJobTitle(title);
-    setShowDropdown(false);
-    const skills = jobSkillsExamples[title] || [];
-    setSuggestedSkills(skills);
-    if (onSelect) onSelect(skills);
+    setSearchTerm(title);
+    if (jobTitles[title]) {
+      onSelect(jobTitles[title]);
+    }
   };
 
-  const handleSearch = () => {
-    handleSelect(jobTitle);
-  };
+  const filteredTitles = Object.keys(jobTitles).filter(title => 
+    title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="mb-4 relative">
-      <label className="block mb-1 text-sm">Search by Job Title</label>
-      <div className="flex gap-2 relative">
+    <div className="mb-6">
+      <label className="block mb-2 text-sm font-medium">
+        Search for a job title to get suggested skills:
+      </label>
+      <div className="relative">
         <input
           type="text"
-          value={jobTitle}
-          onChange={handleInputChange}
-          placeholder="e.g., Software Developer"
-          className="flex-1 p-2 bg-gray-800 rounded-md text-white"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="e.g. Software Developer"
+          className="w-full p-2 bg-gray-800 rounded-md text-white"
         />
-        <button
-          type="button"
-          onClick={handleSearch}
-          className="bg-yellow-300 text-black font-bold px-4 py-2 rounded-md hover:bg-yellow-400 transition"
-        >
-          Search
-        </button>
-      </div>
-
-      {/* Dropdown */}
-      {showDropdown && filteredTitles.length > 0 && (
-        <ul className="absolute bg-gray-800 border border-gray-700 w-full mt-1 rounded-md z-10 max-h-40 overflow-y-auto">
-          {filteredTitles.map((title, index) => (
-            <li
-              key={index}
-              onClick={() => handleSelect(title)}
-              className="p-2 cursor-pointer hover:bg-gray-700 text-white"
-            >
-              {title}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Suggested Skills */}
-      {suggestedSkills.length > 0 && (
-        <div className="mt-3">
-          <p className="text-sm text-yellow-300 font-medium mb-1">Suggested Skills:</p>
-          <ul className="list-disc list-inside text-sm text-white space-y-1">
-            {suggestedSkills.map((skill, index) => (
-              <li key={index}>{skill}</li>
+        {searchTerm && filteredTitles.length > 0 && (
+          <div className="absolute z-10 w-full bg-gray-700 rounded-md shadow-lg max-h-60 overflow-y-auto">
+            {filteredTitles.map((title, index) => (
+              <div
+                key={index}
+                className="p-2 hover:bg-gray-600 cursor-pointer"
+                onClick={() => handleSelect(title)}
+              >
+                {title}
+              </div>
             ))}
-          </ul>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
