@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGraduationCap, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
-import {  faForward } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faTrash, faPlus, faForward } from '@fortawesome/free-solid-svg-icons';
 
-const EducationForm = ({ onChange, onNext }) => {
-  const [educationList, setEducationList] = useState([
+const EducationForm = ({ onChange, onNext, initialData = [] }) => {
+  const [educationList, setEducationList] = useState(initialData.length ? initialData : [
     {
       school: '',
       degree: '',

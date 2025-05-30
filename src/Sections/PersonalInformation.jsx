@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 
-const PersonalInfoForm = ({ onNext, onDataChange }) => {
+const PersonalInfoForm = ({ onNext, onDataChange, initialData }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
     address: '',
-    location: '',
     linkedin: '',
     professionalSummary: '',
     profileImage: null,
   });
+
+  // Initialize form with draft data if available
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -21,10 +27,10 @@ const PersonalInfoForm = ({ onNext, onDataChange }) => {
       [name]: name === 'profileImage' ? files[0] : value,
     };
     setFormData(newFormData);
-    if (onDataChange) onDataChange(newFormData);
   };
 
   const handleNext = () => {
+    if (onDataChange) onDataChange(formData);
     if (onNext) onNext();
   };
 
@@ -41,8 +47,10 @@ const PersonalInfoForm = ({ onNext, onDataChange }) => {
           <div className="bg-gray-700 rounded-full w-[100px] h-[100px] overflow-hidden flex justify-center items-center">
             {formData.profileImage ? (
               <img
-                src={URL.createObjectURL(formData.profileImage)}
-                alt="Profile"
+                src={typeof formData.profileImage === 'string' 
+                  ? formData.profileImage 
+                  : URL.createObjectURL(formData.profileImage)}
+                alt="Profile Preview"
                 className="object-cover w-full h-full rounded-full"
               />
             ) : (
@@ -70,7 +78,9 @@ const PersonalInfoForm = ({ onNext, onDataChange }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {['fullName', 'email', 'phone', 'address'].map((field) => (
               <div key={field}>
-                <label className="block mb-1 text-xs capitalize">{field.replace(/([A-Z])/g, ' $1')}</label>
+                <label className="block mb-1 text-xs capitalize">
+                  {field.replace(/([A-Z])/g, ' $1').trim()}
+                </label>
                 <input
                   type={field === 'email' ? 'email' : 'text'}
                   name={field}
@@ -81,18 +91,6 @@ const PersonalInfoForm = ({ onNext, onDataChange }) => {
                 />
               </div>
             ))}
-          </div>
-
-          <div>
-            <label className="block mb-1 text-xs">Address</label>
-            <textarea
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              rows={2}
-              placeholder="123, Awesome Street, Lagos"
-              className="w-full p-2 bg-gray-800 rounded-md text-sm"
-            />
           </div>
 
           <div>
@@ -111,7 +109,7 @@ const PersonalInfoForm = ({ onNext, onDataChange }) => {
             <label className="block mb-1 text-xs">Professional Summary</label>
             <textarea
               name="professionalSummary"
-              value={formData.professionalSummary}
+              value={formData.profileSummary}
               onChange={handleChange}
               rows={3}
               placeholder="Write a compelling summary..."

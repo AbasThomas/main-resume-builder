@@ -4,6 +4,8 @@ import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 const Bold = ({ data }) => {
+  // Destructure with proper nesting and defaults
+  const personalInfo = data.personalInfo || {};
   const {
     fullName = 'ABAS THOMAS',
     email = 'rescraft@gmail.com',
@@ -11,12 +13,13 @@ const Bold = ({ data }) => {
     address = 'Lagos Nigeria',
     linkedin = 'linkedin.com/in/johndoe',
     professionalSummary = 'Professional summary goes here...',
-    skills = ['Teamwork', 'Customer Service', 'Multitasking', 'Friendly'],
-    experiences = [],
-    education = [],
-    references = [],
-    profileImage,
-  } = data;
+    profileImage = null
+  } = personalInfo;
+
+  const skills = data.skills || ['Teamwork', 'Customer Service', 'Multitasking', 'Friendly'];
+  const experiences = data.experiences || [];
+  const education = data.education || [];
+  const references = data.references || [];
 
   const contactDetails = [
     { value: phone, icon: faPhone },
@@ -33,11 +36,17 @@ const Bold = ({ data }) => {
           <h1 className="text-4xl font-bold">{fullName}</h1>
           <p className="text-xl text-gray-500 mt-1.5">Software Developer</p>
         </div>
-        <div className="w-[80px] h-[80px] bg-gray-300 rounded-full overflow-hidden">
-          {profileImage ? (
-            <img src={URL.createObjectURL(profileImage)} alt="Profile" className="w-full h-full object-cover" />
-          ) : null}
-        </div>
+        {profileImage && (
+          <div className="w-[80px] h-[80px] bg-gray-300 rounded-full overflow-hidden">
+            <img 
+              src={typeof profileImage === 'string' 
+                   ? profileImage 
+                   : URL.createObjectURL(profileImage)} 
+              alt="Profile" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
       </div>
 
       {/* Contact Info */}

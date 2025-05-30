@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 
-const WorkExperienceForm = ({ onChange, onNext }) => {
-  const [experiences, setExperiences] = useState([
+const WorkExperienceForm = ({ onChange, onNext, initialData = [] }) => {
+  const [experiences, setExperiences] = useState(initialData.length ? initialData : [
     {
       company: '',
       position: '',
