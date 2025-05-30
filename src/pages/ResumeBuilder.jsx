@@ -1,6 +1,6 @@
 // src/pages/ResumeBuilder.jsx
-import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useResume } from '../context/ResumeContext';
 
 import R3FBackground from '../components/R3FBackground';
@@ -29,6 +29,19 @@ const ResumeBuilder = () => {
     setResumeData(fullData);
     navigate('/preview');
   };
+  const location = useLocation();
+  useEffect(() => {
+  if (location.state?.step) {
+    setCurrentStep(location.state.step);
+    setProgress((location.state.step - 1) * 20);
+  }
+}, [location.state]);
+useEffect(() => {
+  const draft = localStorage.getItem('resumeDraft');
+  if (draft) {
+    setLocalData(JSON.parse(draft));
+  }
+}, []);
 
   return (
     <div className="relative w-full min-h-screen text-white bg-[var(--almost-black)] overflow-hidden flex items-center justify-center">
@@ -37,7 +50,13 @@ const ResumeBuilder = () => {
       </div>
       <div className="action-btn text-black flex flex-col gap-3">
         <div>
-          <button className="preview-resume-btn bg-yellow-300 hover:cursor-pointer  hover:bg-yellow-400 px-3.5 py-2 rounded-[8px] text-[16px] font-semibold cursor-pointer  text-black text-xs  ">
+          <button 
+          className="preview-resume-btn bg-yellow-300 hover:cursor-pointer  hover:bg-yellow-400 px-3.5 py-2 rounded-[8px] text-[16px] font-semibold cursor-pointer  text-black text-xs  "
+            onClick={() => {
+              setResumeData(localData);
+              navigate('/preview');
+            }}
+          >
             Preview Resume
           </button>
         </div>

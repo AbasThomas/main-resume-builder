@@ -30,10 +30,16 @@ const ResumePreview = () => {
       </div>
       <div className="  w-[900px]  mx-auto rounded-lg shadow-xl p-8 relative">
     <div className='action-btn flex justify-between items-center'>
-        <button className=" bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition cursor-pointer">
+        <button 
+         onClick={() => window.print()}
+        className=" bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition cursor-pointer">
             Export
         </button >
-        <button className=" bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
+        <button 
+          onClick={() => {
+    localStorage.setItem('resumeDraft', JSON.stringify(resumeData));
+    alert('Draft saved!'); }}
+        className=" bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
             Save as Draft
         </button>
                 <button
@@ -47,7 +53,9 @@ const ResumePreview = () => {
         {renderTemplate()}
       </div>
       <div className='justify-self-center'>
-        <button className='text-black bg-yellow-300 font-semibold px-4 py-2 rounded hover:bg-yellow-400 transition cursor-pointer'>
+        <button 
+          onClick={() => navigate('/builder', { state: { step: 6 } })}
+        className='text-black bg-yellow-300 font-semibold px-4 py-2 rounded hover:bg-yellow-400 transition cursor-pointer'>
             Change Template
         </button>
     </div>
