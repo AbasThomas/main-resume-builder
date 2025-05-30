@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
-const Bold = ({ data }) => {
+const Bold = ({ data = {} }) => {
+  // Safeguard against undefined data
+  if (!data) return <div className="w-[900px] p-10 bg-white text-black">Loading resume...</div>;
+  
   // Destructure with proper nesting and defaults
   const personalInfo = data.personalInfo || {};
   const {
