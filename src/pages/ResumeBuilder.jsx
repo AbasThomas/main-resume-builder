@@ -15,13 +15,26 @@ const ResumeBuilder = () => {
   const { setResumeData } = useResume();
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
-  const [localData, setLocalData] = useState({});
+  const [localData, setLocalData] = useState({
+    personalInfo: {},
+    experiences: [],
+    education: [],
+    skills: [],
+    references: [],
+  });
 
   // Load draft data on mount
   useEffect(() => {
     const draft = localStorage.getItem('resumeDraft');
     if (draft) {
-      setLocalData(JSON.parse(draft));
+      const parsed = JSON.parse(draft);
+      setLocalData({
+        personalInfo: parsed.personalInfo || {},
+        experiences: parsed.experiences || [],
+        education: parsed.education || [],
+        skills: parsed.skills || [],
+        references: parsed.references || [],
+      });
     }
     
     if (location.state?.step) {
@@ -40,7 +53,6 @@ const ResumeBuilder = () => {
     const fullData = { 
       ...localData, 
       template,
-      personalInfo: localData.personalInfo || {}
     };
     setResumeData(fullData);
     navigate('/preview');
@@ -66,7 +78,7 @@ const ResumeBuilder = () => {
         <button 
           className="bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded font-semibold text-black"
           onClick={() => {
-            setResumeData({ ...localData, personalInfo: localData.personalInfo || {} });
+            setResumeData({ ...localData });
             navigate('/preview');
           }}
         >

@@ -5,6 +5,7 @@ import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 const PersonalInfoForm = ({ onNext, onDataChange, initialData }) => {
   const [formData, setFormData] = useState({
     fullName: '',
+    position: 'Software Developer',
     email: '',
     phone: '',
     address: '',
@@ -91,6 +92,19 @@ const PersonalInfoForm = ({ onNext, onDataChange, initialData }) => {
                 />
               </div>
             ))}
+            
+            {/* Position field */}
+            <div>
+              <label className="block mb-1 text-xs">Position</label>
+              <input
+                type="text"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                className="w-full p-2 bg-gray-800 rounded-md text-sm"
+                placeholder="Software Developer"
+              />
+            </div>
           </div>
 
           <div>
@@ -109,7 +123,7 @@ const PersonalInfoForm = ({ onNext, onDataChange, initialData }) => {
             <label className="block mb-1 text-xs">Professional Summary</label>
             <textarea
               name="professionalSummary"
-              value={formData.profileSummary}
+              value={formData.professionalSummary}
               onChange={handleChange}
               rows={3}
               placeholder="Write a compelling summary..."

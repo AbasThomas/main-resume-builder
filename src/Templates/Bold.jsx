@@ -8,6 +8,7 @@ const Bold = ({ data }) => {
   const personalInfo = data.personalInfo || {};
   const {
     fullName = 'ABAS THOMAS',
+    position = 'Software Developer',
     email = 'rescraft@gmail.com',
     phone = '010 1010 100 10',
     address = 'Lagos Nigeria',
@@ -34,7 +35,7 @@ const Bold = ({ data }) => {
       <div className="flex justify-between items-center border-b-2 pb-4 border-gray-400">
         <div>
           <h1 className="text-4xl font-bold">{fullName}</h1>
-          <p className="text-xl text-gray-500 mt-1.5">Software Developer</p>
+          <p className="text-xl text-gray-500 mt-1.5">{position}</p>
         </div>
         {profileImage && (
           <div className="w-[80px] h-[80px] bg-gray-300 rounded-full overflow-hidden">
@@ -83,7 +84,9 @@ const Bold = ({ data }) => {
         {experiences.map((exp, idx) => (
           <div key={idx} className="mt-4">
             <div className="font-semibold text-lg">{exp.position} @ {exp.company}</div>
-            <div className="text-sm text-gray-600">{exp.startDate} - {exp.endDate || 'Present'}</div>
+            <div className="text-sm text-gray-600">
+              {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
+            </div>
             <ul className="list-disc ml-5 mt-1 text-[15px] space-y-1">
               {exp.description?.split('\n').map((point, i) => (
                 <li key={i}>{point}</li>
@@ -99,7 +102,13 @@ const Bold = ({ data }) => {
         {education.map((edu, idx) => (
           <div key={idx} className="mt-3">
             <div className="font-semibold text-lg">{edu.degree}</div>
-            <div className="text-sm">{edu.institution} — {edu.startDate} to {edu.endDate || 'Present'}</div>
+            <div className="text-sm">{edu.school} — {edu.startDate} to {edu.current ? 'Present' : edu.endDate}</div>
+            {edu.fieldOfStudy && (
+              <div className="text-sm text-gray-600">Field: {edu.fieldOfStudy}</div>
+            )}
+            {edu.description && (
+              <p className="mt-1 text-sm">{edu.description}</p>
+            )}
           </div>
         ))}
       </section>

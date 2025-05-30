@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const ResumeContext = createContext();
 
@@ -7,10 +7,11 @@ export const useResume = () => useContext(ResumeContext);
 export const ResumeProvider = ({ children }) => {
   const [resumeData, setResumeData] = useState({
     personalInfo: {},
-    skills: [],
-    experience: [],
+    experiences: [],
     education: [],
+    skills: [],
     references: [],
+    template: 'bold'
   });
 
   return (

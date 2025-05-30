@@ -8,13 +8,22 @@ const ResumePreview = () => {
   const { resumeData } = useResume();
   const navigate = useNavigate();
 
+  // Ensure resumeData is always defined
+  const safeResumeData = resumeData || {
+    personalInfo: {},
+    experiences: [],
+    education: [],
+    skills: [],
+    references: [],
+    template: 'bold'
+  };
+
   const renderTemplate = () => {
-    return <Bold data={resumeData} />;
+    return <Bold data={safeResumeData} />;
   };
 
   const saveDraft = () => {
-    // Create a copy without profileImage for localStorage
-    const draftData = { ...resumeData };
+    const draftData = { ...safeResumeData };
     if (draftData.personalInfo?.profileImage) {
       draftData.personalInfo.profileImage = null;
     }
@@ -28,7 +37,7 @@ const ResumePreview = () => {
         <R3FBackground />
       </div>
       
-      <div className="relative z-10 w-[900px] mx-auto rounded-lg shadow-xl p-8">
+      <div className="relative z-10 w-[900px] mx-auto rounded-lg shadow-xl p-8 bg-white">
         <div className='action-btn flex justify-between items-center mb-6'>
           <button 
             onClick={() => window.print()}
@@ -50,7 +59,7 @@ const ResumePreview = () => {
           </button>
         </div>
         
-        <h2 className="text-center text-2xl font-bold mb-6 text-white">
+        <h2 className="text-center text-2xl font-bold mb-6 text-black">
           Your Resume
         </h2>
         
