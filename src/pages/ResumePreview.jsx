@@ -18,6 +18,8 @@ const ResumePreview = () => {
     template: 'bold'
   };
 
+  console.log("ResumePreview data:", safeResumeData);
+
   const renderTemplate = () => {
     return <Bold data={safeResumeData} />;
   };
@@ -37,7 +39,7 @@ const ResumePreview = () => {
         <R3FBackground />
       </div>
       
-      <div className="relative z-10 w-[900px] mx-auto rounded-lg shadow-xl p-8 bg-white">
+      <div className="relative z-10 w-[900px] mx-auto rounded-lg shadow-xl p-8">
         <div className='action-btn flex justify-between items-center mb-6'>
           <button 
             onClick={() => window.print()}

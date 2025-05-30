@@ -5,7 +5,7 @@ import { faUser, faForward } from '@fortawesome/free-solid-svg-icons';
 const PersonalInfoForm = ({ onNext, onDataChange, initialData }) => {
   const [formData, setFormData] = useState({
     fullName: '',
-    position: 'Software Developer',
+    position: '',
     email: '',
     phone: '',
     address: '',

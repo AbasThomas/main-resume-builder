@@ -23,18 +23,28 @@ const ResumeBuilder = () => {
     references: [],
   });
 
+  // Debugging: Log localData whenever it changes
+  useEffect(() => {
+    console.log("ResumeBuilder localData updated:", localData);
+  }, [localData]);
+
   // Load draft data on mount
   useEffect(() => {
     const draft = localStorage.getItem('resumeDraft');
     if (draft) {
-      const parsed = JSON.parse(draft);
-      setLocalData({
-        personalInfo: parsed.personalInfo || {},
-        experiences: parsed.experiences || [],
-        education: parsed.education || [],
-        skills: parsed.skills || [],
-        references: parsed.references || [],
-      });
+      try {
+        const parsed = JSON.parse(draft);
+        console.log("Loaded draft data:", parsed);
+        setLocalData({
+          personalInfo: parsed.personalInfo || {},
+          experiences: parsed.experiences || [],
+          education: parsed.education || [],
+          skills: parsed.skills || [],
+          references: parsed.references || [],
+        });
+      } catch (error) {
+        console.error("Failed to parse draft data:", error);
+      }
     }
     
     if (location.state?.step) {
@@ -54,17 +64,18 @@ const ResumeBuilder = () => {
       ...localData, 
       template,
     };
+    console.log("Submitting template with data:", fullData);
     setResumeData(fullData);
     navigate('/preview');
   };
 
   const saveDraft = () => {
-    // Create a copy without profileImage for localStorage
     const draftData = { ...localData };
     if (draftData.personalInfo?.profileImage) {
       draftData.personalInfo.profileImage = null;
     }
     localStorage.setItem('resumeDraft', JSON.stringify(draftData));
+    console.log("Saved draft:", draftData);
     alert('Draft saved successfully!');
   };
 
@@ -78,6 +89,7 @@ const ResumeBuilder = () => {
         <button 
           className="bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded font-semibold text-black"
           onClick={() => {
+            console.log("Previewing resume with data:", localData);
             setResumeData({ ...localData });
             navigate('/preview');
           }}
@@ -118,28 +130,40 @@ const ResumeBuilder = () => {
         {currentStep === 2 && (
           <WorkExperienceForm
             initialData={localData.experiences}
-            onDataChange={(data) => setLocalData(prev => ({ ...prev, experiences: data }))}
+            onDataChange={(data) => {
+              console.log("Work experiences updated:", data);
+              setLocalData(prev => ({ ...prev, experiences: data }));
+            }}
             onNext={handleNext}
           />
         )}
         {currentStep === 3 && (
           <EducationForm
             initialData={localData.education}
-            onDataChange={(data) => setLocalData(prev => ({ ...prev, education: data }))}
+            onDataChange={(data) => {
+              console.log("Education updated:", data);
+              setLocalData(prev => ({ ...prev, education: data }));
+            }}
             onNext={handleNext}
           />
         )}
         {currentStep === 4 && (
           <SkillsForm
             initialData={localData.skills}
-            onDataChange={(data) => setLocalData(prev => ({ ...prev, skills: data }))}
+            onDataChange={(data) => {
+              console.log("Skills updated:", data);
+              setLocalData(prev => ({ ...prev, skills: data }));
+            }}
             onNext={handleNext}
           />
         )}
         {currentStep === 5 && (
           <ReferencesForm
             initialData={localData.references}
-            onDataChange={(data) => setLocalData(prev => ({ ...prev, references: data }))}
+            onDataChange={(data) => {
+              console.log("References updated:", data);
+              setLocalData(prev => ({ ...prev, references: data }));
+            }}
             onNext={handleNext}
           />
         )}

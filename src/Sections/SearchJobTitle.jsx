@@ -7,6 +7,16 @@ const jobSkillsExamples = {
   'Marketing Specialist': ['Creativity', 'Communication', 'Campaign Planning'],
   'Sales Executive': ['Negotiation', 'Product Knowledge', 'Persuasion'],
   'Graphic Designer': ['Creativity', 'Typography', 'Attention to Detail'],
+  'Data Scientist': ['Python', 'Machine Learning', 'Data Analysis'],
+  'UX Designer': ['User Research', 'Wireframing', 'Prototyping'],
+  'DevOps Engineer': ['Docker', 'Kubernetes', 'CI/CD'],
+  'Network Administrator': ['TCP/IP', 'Firewalls', 'Network Security'],
+  'Database Administrator': ['SQL', 'Database Design', 'Backup & Recovery'],
+  'Business Analyst': ['Requirements Gathering', 'Process Mapping', 'Stakeholder Management'],
+  'HR Manager': ['Recruitment', 'Employee Relations', 'Performance Management'],
+  'Financial Analyst': ['Financial Modeling', 'Data Analysis', 'Budgeting'],
+  'Content Writer': ['SEO', 'Copywriting', 'Research'],
+  'System Administrator': ['Linux', 'Windows Server', 'Virtualization'],
 };
 
 const jobTitles = Object.keys(jobSkillsExamples);
@@ -42,12 +52,18 @@ const SearchJobTitle = ({ onSelect }) => {
   };
 
   const handleSearch = () => {
-    handleSelect(jobTitle);
+    if (jobTitle && jobSkillsExamples[jobTitle]) {
+      handleSelect(jobTitle);
+    } else if (jobTitle) {
+      // Handle case where job title isn't in our list
+      setSuggestedSkills([]);
+      alert("Job title not found. Try a different title.");
+    }
   };
 
   return (
     <div className="mb-4 relative">
-      <label className="block mb-1 text-sm">Search by Job Title</label>
+      <label className="block mb-1 text-sm font-medium">Search by Job Title</label>
       <div className="flex gap-2 relative">
         <input
           type="text"
@@ -55,6 +71,7 @@ const SearchJobTitle = ({ onSelect }) => {
           onChange={handleInputChange}
           placeholder="e.g., Software Developer"
           className="flex-1 p-2 bg-gray-800 rounded-md text-white"
+          onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
         />
         <button
           type="button"
