@@ -20,37 +20,10 @@ const Bold = ({ data = {} }) => {
     profileImage = null
   } = personalInfo;
 
-  const skills = data.skills || [
-    "React", "Tailwind", "Communication"
-  ];
-  const experiences = data.experiences || [
-    {
-      position: "Developer",
-      company: "Tech Co",
-      startDate: "Jan 2020",
-      endDate: "Dec 2022",
-      description: "Built user interfaces.\nOptimized performance.",
-    },
-  ];
-  const education = data.education || [
-    {
-      degree: "BSc in CS",
-      school: "Example University",
-      startDate: "2015",
-      endDate: "2019",
-      fieldOfStudy: "Computer Science",
-      description: "Graduated with honors.",
-    },
-  ];
-  const references = data.references || [
-    {
-      name: "Jane Smith",
-      position: "Manager",
-      company: "Tech Co",
-      email: "jane@techco.com",
-      phone: "555-123-4567",
-    },
-  ];
+  const skills = data.skills || [ ];
+  const experiences = data.experiences || [  ];
+  const education = data.education || [  ];
+  const references = data.references || [ ];
 
   const contactDetails = [
     { value: phone, icon: faPhone },
